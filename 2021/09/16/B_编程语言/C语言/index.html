@@ -212,16 +212,16 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
       el: '#vcomment',
       appId: 'NMLrCujzUqtAbrzzsKHwtDSN-gzGzoHsz',
       appKey: 'EPE9LsVLeBX6g1AQyW0Mv0jM',
-      placeholder: '记得留下你的昵称和邮箱....可以快速收到回复',
+      placeholder: '记得留下你的昵称和邮箱....可以快速收到回复（昵称输入QQ号可自动获取你的头像）',
       avatar: 'monsterid',
       meta: 'nick,mail,link'.split(','),
       pageSize: '10',
       lang: 'zh-CN',
       recordIP: false,
-      serverURLs: '',
+      serverURLs: 'https://nmlrcujz.lc-cn-n1-shared.com# This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)',
       emojiCDN: '',
       emojiMaps: "",
-      enableQQ: false,
+      enableQQ: true,
       path: window.location.pathname,
       requiredFields: ["nick,mail"],
       visitor: false
@@ -289,7 +289,7 @@ if ('Valine' === 'Valine' || !false) {
   }
 
   const getComment = () => {
-    const serverURL = 'https://NMLrCujz.api.lncldglobal.com'
+    const serverURL = 'https://nmlrcujz.lc-cn-n1-shared.com# This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)'
 
     var settings = {
       "method": "GET",
