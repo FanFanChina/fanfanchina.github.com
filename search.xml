@@ -106,6 +106,82 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </tags>
   </entry>
   <entry>
+    <title>C语言</title>
+    <url>/2021/09/16/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80/</url>
+    <content><![CDATA[<h2 id="引言"><code>引言</code></h2>
+<p><strong>本文主要记录一些 C 语言的细节问题</strong></p>
+<hr>
+<h2 id="EOF"><code>EOF</code></h2>
+<p><strong>对于 <code>scanf("%d%d", &amp;a, &amp;b);</code> 而言</strong><br>
+<strong>如果 <code>a</code> 和 <code>b</code> 都被<code>成功读入</code>，那么 scanf 的<code>返回值</code>就是 <code>2</code></strong><br>
+<strong>如果<code>只有a</code> 被成功读入，返回值为 <code>1</code></strong><br>
+<strong>如果 a 和 b <code>都未被</code>成功读入，返回值为 <code>0</code></strong><br>
+<strong>如果遇到<code>错误</code>或遇到 <code>end of file</code>，返回值为 <code>EOF</code>，且返回值为 <code>int</code> 型</strong><br>
+<strong>当<code>读文件</code>操作时，遇到<code>文件结束位置</code>或<code>读数据出错</code>均会返回 <code>EOF</code></strong><br>
+<strong>C 语言中所有的输入输出操作均是按<code>读文件</code>的思想来设计的，或者说是文件操作的一种<code>特例</code>，如 getchar（）就是 fgetc (stdin) 的一个<code>宏</code></strong></p>
+<hr>
+<h2 id="文件操作"><code>文件操作</code></h2>
+<p><strong><a href="http://topurl.cn/7jq">大佬的博客 - CSDN</a></strong></p>
+<hr>
+<h2 id="内存分配"><code>内存分配</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function">C</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> *p=<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>malloc 为<code>动态分配</code>，p 为<code>静态分配</code>（用变量名）</strong><br>
+<strong><code>f（）</code>函数运行<code>结束</code>后，malloc 分配的 <code>100字节的空间</code>依旧存在，而<code>变量p</code> 则不存在了（编译器可能会保存一次）</strong></p>
+<hr>
+<h2 id="字符串"><code>字符串</code></h2>
+<p><strong>在 <code>C语言</code>中这样会报错，但在 <code>Java</code> 中可以这么用</strong><br>
+<img src="https://pic.imgdb.cn/item/6114f65c5132923bf8ea5470.jpg" alt="一个图"><br>
+<strong><code>C语言</code>的正确写法</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">20</span>] = <span class="string">"China"</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(ch, <span class="string">"Lisi"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h2 id="结构体与指针"><code>结构体与指针</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> date;</span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">Std</span>;</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,<span class="built_in">std</span>.date);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> *<span class="title">p</span>=</span>&amp;Std;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,p-&gt;date);</span><br><span class="line"><span class="comment">//p-&gt;date == (*p).date == Std.date</span></span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h2 id="无名结构体"><code>无名结构体</code></h2>
+<p><strong>一、编译器对无名结构体的处理是随机生成一个不重复的变量名</strong></p>
+<p><strong>二、无类型名的结构体变量在声明结构体时就得定义（后续去用的话不知道名字）</strong></p>
+<p><strong>三、因为名字是随机的，所以不可以相互赋值，例子如下：</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="class"><span class="keyword">struct</span>{</span></span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">}a;</span><br><span class="line"><span class="class"><span class="keyword">struct</span>{</span></span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">}b;</span><br><span class="line">b = a; <span class="comment">//报 incompatible type error</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>四、结构体的指针也无法使用，例子如下：</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">}a, * pa;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	pa-&gt;x = <span class="number">1</span>; <span class="comment">//报 pa 是 NULL</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, pa-&gt;x);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>五、用 typedef 处理后可以正常使用，例子如下：</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">}a, * pa;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	a b;</span><br><span class="line">	pa l;</span><br><span class="line">	l = &amp;b;</span><br><span class="line">	b.x = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, l-&gt;x);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>六、对于多个内部相同属性的结构体可以用无名结构体方式处理，更方便。</strong></p>
+<hr>
+<h2 id="scanf和gets"><code>scanf和gets</code></h2>
+<p><strong>scanf 遇到<code>空格</code>停止读取，gets 遇到<code>回车</code>停止读取</strong></p>
+<hr>
+<h2 id="字符串截取函数"><code>字符串截取函数</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 100</span></span><br><span class="line"><span class="comment">//p：待截取的字符串头指针</span></span><br><span class="line"><span class="comment">//s：截取的起始位点</span></span><br><span class="line"><span class="comment">//n：截取长度</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">Intercept_String</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> s, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span>* h; <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	h = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>((n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt; n + s; i++)</span><br><span class="line">	{</span><br><span class="line">		*(h+j)= *(p+i);</span><br><span class="line">		j++;</span><br><span class="line">	}</span><br><span class="line">	*(h + j) = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span> ch[MAX];</span><br><span class="line">	gets_s(ch);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s"</span>, Intercept_String(ch, <span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<h2 id="0x3f3f3f3f"><code>0x3f3f3f3f</code></h2>
+<p><strong>0x3f3f3f3f 的十进制是 1061109567，是 109 级别的，而一般场合下的数据都是小于 109 的，所以它可以作为<code>无穷大</code>使用而不致出现数据大于无穷大的情形</strong></p>
+<h2 id="memset"><code>memset</code></h2>
+<p><strong><a href="https://blog.csdn.net/xp178171640/article/details/115751021?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212541216780269835428%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163212541216780269835428&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-115751021.pc_search_result_hbase_insert&amp;utm_term=c%2B%2Bmemset&amp;spm=1018.2226.3001.4187">相关链接</a></strong><br>
+<strong>memset 实现原理是根据<code>字节</code>来设置的</strong><br>
+<strong>对于int而言有四个字节我们这样memset</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">memset</span>(map, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(map));</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="随机数"><code>随机数</code></h2>
+<p><strong>1.头文件</strong></p>
+<p>stdlib.h</p>
+<p><strong>2.设置随机数种子(Set Rand)</strong></p>
+<p>srand(unsigned int(time(NULL)))</p>
+<p><strong>3.Rand函数</strong></p>
+<p>rand()%100【0-99】</p>
+<p>rand()%100+1【1-100】</p>
+<p><strong>4.实例：洗牌</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">10</span>], n;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>)time(<span class="literal">NULL</span>));</span><br><span class="line">		<span class="keyword">int</span> r = rand()%i+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> t;</span><br><span class="line">		t = a[r]; a[r] = a[i]; a[i] = t;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="异或的用法"><code>异或的用法</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	scanf_s(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line">	a = a ^ b;</span><br><span class="line">	b = a ^ b;</span><br><span class="line">	a = a ^ b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %d"</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>B_编程语言</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>汇编语言</title>
     <url>/2021/11/01/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/H_%E6%B1%87%E7%BC%96/</url>
     <content><![CDATA[<h1><code>寄存器</code></h1>
@@ -223,82 +299,6 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </categories>
       <tags>
         <tag>汇编</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C语言</title>
-    <url>/2021/09/16/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80/</url>
-    <content><![CDATA[<h2 id="引言"><code>引言</code></h2>
-<p><strong>本文主要记录一些 C 语言的细节问题</strong></p>
-<hr>
-<h2 id="EOF"><code>EOF</code></h2>
-<p><strong>对于 <code>scanf("%d%d", &amp;a, &amp;b);</code> 而言</strong><br>
-<strong>如果 <code>a</code> 和 <code>b</code> 都被<code>成功读入</code>，那么 scanf 的<code>返回值</code>就是 <code>2</code></strong><br>
-<strong>如果<code>只有a</code> 被成功读入，返回值为 <code>1</code></strong><br>
-<strong>如果 a 和 b <code>都未被</code>成功读入，返回值为 <code>0</code></strong><br>
-<strong>如果遇到<code>错误</code>或遇到 <code>end of file</code>，返回值为 <code>EOF</code>，且返回值为 <code>int</code> 型</strong><br>
-<strong>当<code>读文件</code>操作时，遇到<code>文件结束位置</code>或<code>读数据出错</code>均会返回 <code>EOF</code></strong><br>
-<strong>C 语言中所有的输入输出操作均是按<code>读文件</code>的思想来设计的，或者说是文件操作的一种<code>特例</code>，如 getchar（）就是 fgetc (stdin) 的一个<code>宏</code></strong></p>
-<hr>
-<h2 id="文件操作"><code>文件操作</code></h2>
-<p><strong><a href="http://topurl.cn/7jq">大佬的博客 - CSDN</a></strong></p>
-<hr>
-<h2 id="内存分配"><code>内存分配</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function">C</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> *p=<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>malloc 为<code>动态分配</code>，p 为<code>静态分配</code>（用变量名）</strong><br>
-<strong><code>f（）</code>函数运行<code>结束</code>后，malloc 分配的 <code>100字节的空间</code>依旧存在，而<code>变量p</code> 则不存在了（编译器可能会保存一次）</strong></p>
-<hr>
-<h2 id="字符串"><code>字符串</code></h2>
-<p><strong>在 <code>C语言</code>中这样会报错，但在 <code>Java</code> 中可以这么用</strong><br>
-<img src="https://pic.imgdb.cn/item/6114f65c5132923bf8ea5470.jpg" alt="一个图"><br>
-<strong><code>C语言</code>的正确写法</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span> ch[<span class="number">20</span>] = <span class="string">"China"</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(ch, <span class="string">"Lisi"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<hr>
-<h2 id="结构体与指针"><code>结构体与指针</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> date;</span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">Std</span>;</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,<span class="built_in">std</span>.date);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> *<span class="title">p</span>=</span>&amp;Std;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,p-&gt;date);</span><br><span class="line"><span class="comment">//p-&gt;date == (*p).date == Std.date</span></span><br></pre></td></tr></tbody></table></figure>
-<hr>
-<h2 id="无名结构体"><code>无名结构体</code></h2>
-<p><strong>一、编译器对无名结构体的处理是随机生成一个不重复的变量名</strong></p>
-<p><strong>二、无类型名的结构体变量在声明结构体时就得定义（后续去用的话不知道名字）</strong></p>
-<p><strong>三、因为名字是随机的，所以不可以相互赋值，例子如下：</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="class"><span class="keyword">struct</span>{</span></span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">}a;</span><br><span class="line"><span class="class"><span class="keyword">struct</span>{</span></span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">}b;</span><br><span class="line">b = a; <span class="comment">//报 incompatible type error</span></span><br></pre></td></tr></tbody></table></figure>
-<p><strong>四、结构体的指针也无法使用，例子如下：</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">}a, * pa;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	pa-&gt;x = <span class="number">1</span>; <span class="comment">//报 pa 是 NULL</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, pa-&gt;x);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>五、用 typedef 处理后可以正常使用，例子如下：</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">}a, * pa;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	a b;</span><br><span class="line">	pa l;</span><br><span class="line">	l = &amp;b;</span><br><span class="line">	b.x = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, l-&gt;x);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>六、对于多个内部相同属性的结构体可以用无名结构体方式处理，更方便。</strong></p>
-<hr>
-<h2 id="scanf和gets"><code>scanf和gets</code></h2>
-<p><strong>scanf 遇到<code>空格</code>停止读取，gets 遇到<code>回车</code>停止读取</strong></p>
-<hr>
-<h2 id="字符串截取函数"><code>字符串截取函数</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">C</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 100</span></span><br><span class="line"><span class="comment">//p：待截取的字符串头指针</span></span><br><span class="line"><span class="comment">//s：截取的起始位点</span></span><br><span class="line"><span class="comment">//n：截取长度</span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">Intercept_String</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> s, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span>* h; <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	h = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>((n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt; n + s; i++)</span><br><span class="line">	{</span><br><span class="line">		*(h+j)= *(p+i);</span><br><span class="line">		j++;</span><br><span class="line">	}</span><br><span class="line">	*(h + j) = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">char</span> ch[MAX];</span><br><span class="line">	gets_s(ch);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s"</span>, Intercept_String(ch, <span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<hr>
-<h2 id="0x3f3f3f3f"><code>0x3f3f3f3f</code></h2>
-<p><strong>0x3f3f3f3f 的十进制是 1061109567，是 109 级别的，而一般场合下的数据都是小于 109 的，所以它可以作为<code>无穷大</code>使用而不致出现数据大于无穷大的情形</strong></p>
-<h2 id="memset"><code>memset</code></h2>
-<p><strong><a href="https://blog.csdn.net/xp178171640/article/details/115751021?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212541216780269835428%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163212541216780269835428&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-115751021.pc_search_result_hbase_insert&amp;utm_term=c%2B%2Bmemset&amp;spm=1018.2226.3001.4187">相关链接</a></strong><br>
-<strong>memset 实现原理是根据<code>字节</code>来设置的</strong><br>
-<strong>对于int而言有四个字节我们这样memset</strong></p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">memset</span>(map, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(map));</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="随机数"><code>随机数</code></h2>
-<p><strong>1.头文件</strong></p>
-<p>stdlib.h</p>
-<p><strong>2.设置随机数种子(Set Rand)</strong></p>
-<p>srand(unsigned int(time(NULL)))</p>
-<p><strong>3.Rand函数</strong></p>
-<p>rand()%100【0-99】</p>
-<p>rand()%100+1【1-100】</p>
-<p><strong>4.实例：洗牌</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">10</span>], n;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>)time(<span class="literal">NULL</span>));</span><br><span class="line">		<span class="keyword">int</span> r = rand()%i+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> t;</span><br><span class="line">		t = a[r]; a[r] = a[i]; a[i] = t;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; a[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="异或的用法"><code>异或的用法</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	scanf_s(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line">	a = a ^ b;</span><br><span class="line">	b = a ^ b;</span><br><span class="line">	a = a ^ b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %d"</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>B_编程语言</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -825,25 +825,6 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </tags>
   </entry>
   <entry>
-    <title>世界的律动</title>
-    <url>/2021/09/16/X_%E5%86%99%E4%BD%9C/S_%E4%B8%96%E7%95%8C%E7%9A%84%E5%BE%8B%E5%8A%A8/</url>
-    <content><![CDATA[<p>​       夕阳渐落，西天的云被染成了鲜艳的橙，万物林立在流彩的霞光之中，像极了严正以待的士兵。一阵暖风在红日光轮下成型，吹向高耸的云白山脉。满山的黄叶微微颤动，光影交错相叠。云白山头，坐着一位十几岁的少年郎，一袭白衣在夕阳的映衬下，显露出暗金色。其手间是一本《诗歌 300 首》，少年一手撑着脑袋，张口朗朗诵读道：余忆童稚时，能张目对日，明察秋毫。见藐小微物，必细察其纹理。</p>
-<p>读完该段后便将书丢放到一旁，径直躺下，双手顺势垫住头部，悠然地望着蔚蓝的天空，笑道：沈爷爷小的时候竟能这么有趣，张目对日，那所见一切都会溢满金色，而且一切也会充满了温暖。说到此处，像是想起了什么，猛然翻身坐起，眺望着西天那抹淡淡红晕，会心地笑了起来，太阳公公要去地球另一侧送温暖了，在此之前，西天的云是它最后的温暖对象。</p>
-<p>那么地球另一侧的人是否知道张目对日这个秘密呢？少年遐想道，“若我长大了，一定要去地球的那一侧，告诉他们这个秘密，算了，我现在就要告知天下这个大秘密”。</p>
-<p>在夕阳最后的余晖中，少年双手成拳，对着西天呐喊：太阳公公！多谢你给我的世界带来金色和温暖！遥远的西天传来阵阵回声，像是这个世界对少年的回应。</p>
-<p>随着最后一个 “暖” 字结束，夕阳消失了。</p>
-<p>星球的这一侧变成了略带温热的蓝调星球。</p>
-<p>这是黑夜来临前的独一无二的蓝调世界，远处的世界渐渐被黑色覆盖，深蓝色慢慢变成黑色。当夜幕袭来，整个天空都会被星河取代。但在此之前，我们会短暂地停留在这个深蓝色世界里面。</p>
-<p>“该回家了”，少年将书拿起来，目光四处环绕着这个深蓝世界，向家的方向走去，一步步带着悠闲和惬意，黑夜和冷风被他远远甩在身后，月光微微，轻轻打在他的身上。</p>
-]]></content>
-      <categories>
-        <category>X_写作</category>
-      </categories>
-      <tags>
-        <tag>小说</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>句子集</title>
     <url>/2021/09/16/X_%E5%86%99%E4%BD%9C/J_%E5%8F%A5%E5%AD%90%E9%9B%86/</url>
     <content><![CDATA[<h2 id="一"><code>一</code></h2>
@@ -864,6 +845,25 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </categories>
       <tags>
         <tag>句</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>世界的律动</title>
+    <url>/2021/09/16/X_%E5%86%99%E4%BD%9C/S_%E4%B8%96%E7%95%8C%E7%9A%84%E5%BE%8B%E5%8A%A8/</url>
+    <content><![CDATA[<p>​       夕阳渐落，西天的云被染成了鲜艳的橙，万物林立在流彩的霞光之中，像极了严正以待的士兵。一阵暖风在红日光轮下成型，吹向高耸的云白山脉。满山的黄叶微微颤动，光影交错相叠。云白山头，坐着一位十几岁的少年郎，一袭白衣在夕阳的映衬下，显露出暗金色。其手间是一本《诗歌 300 首》，少年一手撑着脑袋，张口朗朗诵读道：余忆童稚时，能张目对日，明察秋毫。见藐小微物，必细察其纹理。</p>
+<p>读完该段后便将书丢放到一旁，径直躺下，双手顺势垫住头部，悠然地望着蔚蓝的天空，笑道：沈爷爷小的时候竟能这么有趣，张目对日，那所见一切都会溢满金色，而且一切也会充满了温暖。说到此处，像是想起了什么，猛然翻身坐起，眺望着西天那抹淡淡红晕，会心地笑了起来，太阳公公要去地球另一侧送温暖了，在此之前，西天的云是它最后的温暖对象。</p>
+<p>那么地球另一侧的人是否知道张目对日这个秘密呢？少年遐想道，“若我长大了，一定要去地球的那一侧，告诉他们这个秘密，算了，我现在就要告知天下这个大秘密”。</p>
+<p>在夕阳最后的余晖中，少年双手成拳，对着西天呐喊：太阳公公！多谢你给我的世界带来金色和温暖！遥远的西天传来阵阵回声，像是这个世界对少年的回应。</p>
+<p>随着最后一个 “暖” 字结束，夕阳消失了。</p>
+<p>星球的这一侧变成了略带温热的蓝调星球。</p>
+<p>这是黑夜来临前的独一无二的蓝调世界，远处的世界渐渐被黑色覆盖，深蓝色慢慢变成黑色。当夜幕袭来，整个天空都会被星河取代。但在此之前，我们会短暂地停留在这个深蓝色世界里面。</p>
+<p>“该回家了”，少年将书拿起来，目光四处环绕着这个深蓝世界，向家的方向走去，一步步带着悠闲和惬意，黑夜和冷风被他远远甩在身后，月光微微，轻轻打在他的身上。</p>
+]]></content>
+      <categories>
+        <category>X_写作</category>
+      </categories>
+      <tags>
+        <tag>小说</tag>
       </tags>
   </entry>
   <entry>
@@ -1005,6 +1005,48 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </tags>
   </entry>
   <entry>
+    <title>哈夫曼树</title>
+    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E6%A0%91%E3%80%81%E5%9B%BE/H_%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</url>
+    <content><![CDATA[<h2 id="介绍"><code>介绍</code></h2>
+<p><strong>哈夫曼树 (Huffman Tree)</strong></p>
+<blockquote>
+<p>背景：著名的 哈夫曼编码 发明人 戴维・霍夫曼于 1999 年 10 月 17 日因癌症去世，享年 74 岁，他发明了著名的的 霍夫曼编码，除了霍夫曼编码以外，他还涉及出二叉最优搜索树的算法，因为其效率最高，所以被命名为霍夫曼算法，是动态规划的一个范例</p>
+</blockquote>
+<p><strong>通过哈夫曼树，我们往往可以得到问题的最优解</strong><br>
+<strong>所以<code>哈夫曼树</code>也叫做<code>最优二叉树</code></strong><br>
+<strong><code>最优二叉树</code>是在<code>叶子结点和权重</code>确定的情况下，带权路径长度（WPL）<code>最小</code>的二叉树</strong></p>
+<hr>
+<h2 id="什么是带权路径长度（WPL）"><code>什么是带权路径长度（WPL）</code></h2>
+<p><img src="https://pic.imgdb.cn/item/612f23c244eaada739845c27.jpg" alt="计算WPL"><br>
+<strong>我们要做的就是找到 WPL 最小的二叉树</strong></p>
+<hr>
+<h2 id="构建最优二叉树"><code>构建最优二叉树</code></h2>
+<blockquote>
+<p><strong>不难发现要使得 WPL 最小，那么深度越大的叶子结点权值就越小，深度小的叶子结点权值就越大，我们从下往上，深度减小的方向构建二叉树。</strong></p>
+</blockquote>
+<p><strong>具体步骤：</strong></p>
+<p><strong>一、从小到大进行排序，将每一个数据，每个数据都是一个节点 ， 每个节点可以看成是一颗最简单的二叉树</strong></p>
+<p><strong>二、取出根节点权值最小的两颗二叉树</strong></p>
+<p><strong>三、组成一颗新的二叉树，该新的二叉树的根节点的权值是前面两颗二叉树根节点权值的和</strong></p>
+<p><strong>四、再将这颗新的二叉树，以根节点的权值大小 再次排序， 不断重复 1-2-3-4 的步骤，直到数列中，所有的数据都被处理，就得到一颗赫夫曼树</strong></p>
+<hr>
+<h2 id="代码实现"><code>代码实现</code></h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="适用情况"><code>适用情况</code></h2>
+<p><strong>一、根节点的值等于叶子节点</strong><br>
+<strong>二、出现最小，最优的字眼时</strong><br>
+<strong>三、与求最小 WPL 等价时</strong></p>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>树</tag>
+        <tag>HT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>链表</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/L_%E9%93%BE%E8%A1%A8/L_%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h2 id="链表结点">链表结点</h2>
@@ -1064,48 +1106,6 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       <tags>
         <tag>数据结构</tag>
         <tag>树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>哈夫曼树</title>
-    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E6%A0%91%E3%80%81%E5%9B%BE/H_%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/</url>
-    <content><![CDATA[<h2 id="介绍"><code>介绍</code></h2>
-<p><strong>哈夫曼树 (Huffman Tree)</strong></p>
-<blockquote>
-<p>背景：著名的 哈夫曼编码 发明人 戴维・霍夫曼于 1999 年 10 月 17 日因癌症去世，享年 74 岁，他发明了著名的的 霍夫曼编码，除了霍夫曼编码以外，他还涉及出二叉最优搜索树的算法，因为其效率最高，所以被命名为霍夫曼算法，是动态规划的一个范例</p>
-</blockquote>
-<p><strong>通过哈夫曼树，我们往往可以得到问题的最优解</strong><br>
-<strong>所以<code>哈夫曼树</code>也叫做<code>最优二叉树</code></strong><br>
-<strong><code>最优二叉树</code>是在<code>叶子结点和权重</code>确定的情况下，带权路径长度（WPL）<code>最小</code>的二叉树</strong></p>
-<hr>
-<h2 id="什么是带权路径长度（WPL）"><code>什么是带权路径长度（WPL）</code></h2>
-<p><img src="https://pic.imgdb.cn/item/612f23c244eaada739845c27.jpg" alt="计算WPL"><br>
-<strong>我们要做的就是找到 WPL 最小的二叉树</strong></p>
-<hr>
-<h2 id="构建最优二叉树"><code>构建最优二叉树</code></h2>
-<blockquote>
-<p><strong>不难发现要使得 WPL 最小，那么深度越大的叶子结点权值就越小，深度小的叶子结点权值就越大，我们从下往上，深度减小的方向构建二叉树。</strong></p>
-</blockquote>
-<p><strong>具体步骤：</strong></p>
-<p><strong>一、从小到大进行排序，将每一个数据，每个数据都是一个节点 ， 每个节点可以看成是一颗最简单的二叉树</strong></p>
-<p><strong>二、取出根节点权值最小的两颗二叉树</strong></p>
-<p><strong>三、组成一颗新的二叉树，该新的二叉树的根节点的权值是前面两颗二叉树根节点权值的和</strong></p>
-<p><strong>四、再将这颗新的二叉树，以根节点的权值大小 再次排序， 不断重复 1-2-3-4 的步骤，直到数列中，所有的数据都被处理，就得到一颗赫夫曼树</strong></p>
-<hr>
-<h2 id="代码实现"><code>代码实现</code></h2>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="适用情况"><code>适用情况</code></h2>
-<p><strong>一、根节点的值等于叶子节点</strong><br>
-<strong>二、出现最小，最优的字眼时</strong><br>
-<strong>三、与求最小 WPL 等价时</strong></p>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-        <tag>树</tag>
-        <tag>HT</tag>
       </tags>
   </entry>
   <entry>
@@ -1435,28 +1435,6 @@ vector 与普通数组区别 在于数组是<code>静态</code>空间，而 vect
       </tags>
   </entry>
   <entry>
-    <title>Healthy Holsteins</title>
-    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/Healthy%20Holsteins/</url>
-    <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
-<p><strong><a href="https://www.luogu.com.cn/problem/P1460">Healthy Holsteins</a></strong></p>
-<h2 id="完整代码"><code>完整代码</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 30</span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> p, step;</span><br><span class="line"><span class="keyword">int</span> v[MAX], sum[MAX];</span><br><span class="line"><span class="keyword">int</span> s[MAX][MAX], book[MAX], FangAn[<span class="number">999999</span>][MAX];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">record</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	step++;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p+<span class="number">1</span>; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (book[i] == <span class="number">1</span>)</span><br><span class="line">		{</span><br><span class="line">			FangAn[step][i] = <span class="number">1</span>;</span><br><span class="line">			FangAn[step][p + <span class="number">1</span>]+=i;</span><br><span class="line">			FangAn[step][p + <span class="number">2</span>]++;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> min = <span class="number">9999999</span>, f;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= step; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (min &gt; FangAn[i][p + <span class="number">2</span>])</span><br><span class="line">		{</span><br><span class="line">			min = FangAn[i][p + <span class="number">2</span>];</span><br><span class="line">			f = i;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, FangAn[f][p + <span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= p; j++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (FangAn[f][j] == <span class="number">1</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, j);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (i == p+<span class="number">1</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (sum[j] &lt; v[j])</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			record();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//选</span></span><br><span class="line">	book[i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		sum[j] += s[i][j];</span><br><span class="line">	dfs(i + <span class="number">1</span>);</span><br><span class="line">	book[i] = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//不选</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		sum[j] -= s[i][j];</span><br><span class="line">	dfs(i + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v[i]);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;s[i][j]);</span><br><span class="line">	}</span><br><span class="line">	dfs(<span class="number">1</span>);</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="关键点"><code>关键点</code></h2>
-<h3 id="我们从第一种饲料开始往下选，直到i-p-1"><code>我们从第一种饲料开始往下选，直到i=p+1</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (i == p+<span class="number">1</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (sum[j] &lt; v[j])</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			record();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="每种饲料有两种状态、即选或者不选"><code>每种饲料有两种状态、即选或者不选</code></h3>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//选</span></span><br><span class="line">book[i]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">	sum[j] += s[i][j];</span><br><span class="line">dfs(i + <span class="number">1</span>);</span><br><span class="line">C</span><br><span class="line"><span class="comment">//不选</span></span><br><span class="line">book[i] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">	sum[j] -= s[i][j];</span><br><span class="line">dfs(i + <span class="number">1</span>);</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>搜索🔍</tag>
-        <tag>DFS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>单词接龙</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/D_%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/</url>
     <content><![CDATA[<h2 id="题目描述"><code>题目描述</code></h2>
@@ -1562,57 +1540,17 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
       </tags>
   </entry>
   <entry>
-    <title>迷宫最短路径问题</title>
-    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/M_%E8%BF%B7%E5%AE%AB%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="迷宫最短路径问题">迷宫最短路径问题</h3>
-<h2 id="完整代码如下：">完整代码如下：</h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;<span class="comment">//横坐标</span></span><br><span class="line">	<span class="keyword">int</span> y;<span class="comment">//纵坐标</span></span><br><span class="line">	<span class="keyword">int</span> s;<span class="comment">//步数</span></span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">que</span>[2501];</span></span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">51</span>][<span class="number">51</span>] = { <span class="number">0</span> }, book[<span class="number">51</span>][<span class="number">51</span>] = { <span class="number">0</span> };</span><br><span class="line">	<span class="keyword">int</span> next[<span class="number">4</span>][<span class="number">2</span>] = { {<span class="number">0</span>,<span class="number">1</span>} ,{<span class="number">1</span>,<span class="number">0</span>} ,{<span class="number">0</span>,<span class="number">-1</span>}, {<span class="number">-1</span>,<span class="number">0</span>} };</span><br><span class="line">	<span class="keyword">int</span> head, tail;<span class="comment">//引入队列</span></span><br><span class="line">	<span class="keyword">int</span> i, j, k, m, n, startx, starty, p, q, tx, ty, flag;</span><br><span class="line">	<span class="comment">//读入目标迷宫大小</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="comment">//读入迷宫</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i][j]);</span><br><span class="line">	<span class="comment">//读入起点和终点</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d %d %d"</span>, &amp;startx, &amp;starty, &amp;p, &amp;q);</span><br><span class="line">	<span class="comment">//队列初始化</span></span><br><span class="line">	head = <span class="number">0</span>;</span><br><span class="line">	tail = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//起点入队</span></span><br><span class="line">	que[<span class="number">1</span>].x = startx;</span><br><span class="line">	que[<span class="number">1</span>].y = starty;</span><br><span class="line">	que[<span class="number">1</span>].s = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//标记起点</span></span><br><span class="line">	book[startx][starty] = <span class="number">1</span>;</span><br><span class="line">	flag = <span class="number">0</span>;<span class="comment">//标识符</span></span><br><span class="line">	<span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">	{</span><br><span class="line">		head++;</span><br><span class="line">		<span class="keyword">for</span> (k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">//父单元按规律向4个方向拓展</span></span><br><span class="line">			tx = que[head].x + next[k][<span class="number">0</span>];</span><br><span class="line">			ty = que[head].y + next[k][<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span> (tx&lt;<span class="number">1</span> || tx&gt;n || ty&lt;<span class="number">1</span> || ty&gt;m)</span><br><span class="line">				<span class="keyword">continue</span>;<span class="comment">//越界则重新试探</span></span><br><span class="line">			<span class="keyword">if</span> (a[tx][ty] == <span class="number">0</span> &amp;&amp; book[tx][ty] == <span class="number">0</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="comment">//拓展成功则标记拓展的点并将其入队，累加步数。</span></span><br><span class="line">				tail++;</span><br><span class="line">				book[tx][ty] = <span class="number">1</span>;</span><br><span class="line">				que[tail].x = tx;</span><br><span class="line">				que[tail].y = ty;</span><br><span class="line">				que[tail].s = que[head].s + <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//拓展到目标点时结束拓展调用标识符结束拓展</span></span><br><span class="line">			<span class="keyword">if</span> (tx == p &amp;&amp; ty == q)</span><br><span class="line">			{</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="comment">//若成功标记则结束while循环</span></span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, que[tail].s);</span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="思路详解">思路详解</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第一步：定义note结构体</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>我们要记录最路径，路径大小和经过的点数有关<br>
-顾名思义我们需要在点上做文章<br>
-一个点拥有（x，y）坐标<br>
-我们定义一个含距离的关于点的结构体<br>
-如下：</p>
-</blockquote>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;<span class="comment">//横坐标</span></span><br><span class="line">	<span class="keyword">int</span> y;<span class="comment">//纵坐标</span></span><br><span class="line">	<span class="keyword">int</span> s;<span class="comment">//步数</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>点的个数和迷宫大小有关<br>
-这里我们取最大值如下：</p>
-</blockquote>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">que</span>[2501];</span></span><br></pre></td></tr></tbody></table></figure>
-<hr>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第二步：引入队列的思维</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>BFS 搜索🔍是由父层向下遍历探索所有可能的子结构<br>
-探索成功后之前的子层成为了新的父层继续上述操作<br>
-不由可以联想到<br>
-父到子 &gt;&gt; head 向下试探，成功则 tail++<br>
-子成父 &gt;&gt; head++<br>
-如下：</p>
-</blockquote>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">	{</span><br><span class="line">		head++；<span class="comment">//将1单元成为父单元</span></span><br><span class="line">		<span class="keyword">for</span> (k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">//父单元按规律向4个方向拓展</span></span><br><span class="line">			tx = que[head].x + next[k][<span class="number">0</span>];</span><br><span class="line">			ty = que[head].y + next[k][<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span> (tx&lt;<span class="number">1</span> || tx&gt;n || ty&lt;<span class="number">1</span> || ty&gt;m)</span><br><span class="line">				<span class="keyword">continue</span>;<span class="comment">//越界则重新试探</span></span><br><span class="line">			<span class="keyword">if</span> (a[tx][ty] == <span class="number">0</span> &amp;&amp; book[tx][ty] == <span class="number">0</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="comment">//拓展成功则标记拓展的点并将其入队，累加步数。</span></span><br><span class="line">				tail++;<span class="comment">//扩充队列,将新的点入队</span></span><br><span class="line">				book[tx][ty] = <span class="number">1</span>;</span><br><span class="line">				que[tail].x = tx;</span><br><span class="line">				que[tail].y = ty;</span><br><span class="line">				que[tail].s = que[head].s + <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//拓展到目标点时结束拓展调用标识符结束拓展</span></span><br><span class="line">			<span class="keyword">if</span> (tx == p &amp;&amp; ty == q)</span><br><span class="line">			{</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="comment">//若成功标记则结束while循环</span></span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
-<hr>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第三步：最小路径</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>问题 1：为什么拓展到终点时必为最短路径？<br>
-解答：因为每一层拓展均为步数加 1，所以拓展的过程中步数是一样累加的<br>
-并没有多走的情况，同步出发，并且只要到终点后 while 循环便会停止，所得 &gt; 一定为最短路径</p>
-</blockquote>
-<blockquote>
-<p>问题 2：输出最短路径时为什么要用 <strong>que[tail].s</strong> ?<br>
-解答：我们刚开始定义 tail 为 1，tail 表示队尾位置，成功拓展至终点后 ， <strong>终点即为队尾位置</strong>即 que [tail].s;</p>
-</blockquote>
-<hr>
-<h2 id="summary："><code>summary：</code></h2>
-<p>（1）本题和 <a href="https://blog.csdn.net/Arthur_1122/article/details/116764674">BFS - 马的遍历</a>异同之处？</p>
-<blockquote>
-<p>本题：将距离 s 定义在结构体之内，使得每一个节点均含有到此的最小步数<br>
-other：马的遍历是将距离放在一个二维数组里面，二维数组的下标为位置坐标，我们需要关注的是起点位置为队列的首位，符合以下对应关系：<br>
-坐标：(sx,sy)&gt;&gt;(qun [1].x,qun [1].y) 即队列第一单元<br>
-步数：a [sx][sy]=0&gt;&gt;a [qun [1].x][qun [1].y]=0 即队列第一单元对应 0 步</p>
-</blockquote>
+    <title>Healthy Holsteins</title>
+    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/Healthy%20Holsteins/</url>
+    <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
+<p><strong><a href="https://www.luogu.com.cn/problem/P1460">Healthy Holsteins</a></strong></p>
+<h2 id="完整代码"><code>完整代码</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 30</span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> p, step;</span><br><span class="line"><span class="keyword">int</span> v[MAX], sum[MAX];</span><br><span class="line"><span class="keyword">int</span> s[MAX][MAX], book[MAX], FangAn[<span class="number">999999</span>][MAX];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">record</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	step++;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p+<span class="number">1</span>; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (book[i] == <span class="number">1</span>)</span><br><span class="line">		{</span><br><span class="line">			FangAn[step][i] = <span class="number">1</span>;</span><br><span class="line">			FangAn[step][p + <span class="number">1</span>]+=i;</span><br><span class="line">			FangAn[step][p + <span class="number">2</span>]++;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> min = <span class="number">9999999</span>, f;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= step; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (min &gt; FangAn[i][p + <span class="number">2</span>])</span><br><span class="line">		{</span><br><span class="line">			min = FangAn[i][p + <span class="number">2</span>];</span><br><span class="line">			f = i;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, FangAn[f][p + <span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= p; j++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (FangAn[f][j] == <span class="number">1</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, j);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (i == p+<span class="number">1</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (sum[j] &lt; v[j])</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			record();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//选</span></span><br><span class="line">	book[i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		sum[j] += s[i][j];</span><br><span class="line">	dfs(i + <span class="number">1</span>);</span><br><span class="line">	book[i] = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//不选</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		sum[j] -= s[i][j];</span><br><span class="line">	dfs(i + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v[i]);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;s[i][j]);</span><br><span class="line">	}</span><br><span class="line">	dfs(<span class="number">1</span>);</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="关键点"><code>关键点</code></h2>
+<h3 id="我们从第一种饲料开始往下选，直到i-p-1"><code>我们从第一种饲料开始往下选，直到i=p+1</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (i == p+<span class="number">1</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (sum[j] &lt; v[j])</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			record();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="每种饲料有两种状态、即选或者不选"><code>每种饲料有两种状态、即选或者不选</code></h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//选</span></span><br><span class="line">book[i]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">	sum[j] += s[i][j];</span><br><span class="line">dfs(i + <span class="number">1</span>);</span><br><span class="line">C</span><br><span class="line"><span class="comment">//不选</span></span><br><span class="line">book[i] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">	sum[j] -= s[i][j];</span><br><span class="line">dfs(i + <span class="number">1</span>);</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
         <category>S_算法与数据结构</category>
@@ -1620,7 +1558,7 @@ other：马的遍历是将距离放在一个二维数组里面，二维数组的
       <tags>
         <tag>算法</tag>
         <tag>搜索🔍</tag>
-        <tag>BFS</tag>
+        <tag>DFS</tag>
       </tags>
   </entry>
   <entry>
@@ -1715,33 +1653,6 @@ other：马的遍历是将距离放在一个二维数组里面，二维数组的
       </tags>
   </entry>
   <entry>
-    <title>全排列</title>
-    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/Q_%E5%85%A8%E6%8E%92%E5%88%97/</url>
-    <content><![CDATA[<h3 id="全排列问题">全排列问题</h3>
-<p><strong>完整代码：</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>], book[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> step)</span> </span>{</span><br><span class="line">	<span class="keyword">if</span> (step == n + <span class="number">1</span>) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) {</span><br><span class="line">		<span class="keyword">if</span> (book[i] == <span class="number">0</span>) {</span><br><span class="line">			a[step] = i;</span><br><span class="line">			book[i] = <span class="number">1</span>;</span><br><span class="line">			dfs(step + <span class="number">1</span>);</span><br><span class="line">			book[i] = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	dfs(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>核心代码（DFS 部分）：</strong></p>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> step)</span></span>{</span><br><span class="line">	<span class="keyword">if</span>(step==n+<span class="number">1</span>){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>,a[i]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++){</span><br><span class="line">		<span class="keyword">if</span>(book[i]==<span class="number">0</span>){</span><br><span class="line">			a[step]=i;</span><br><span class="line">			book[i]=<span class="number">1</span>;</span><br><span class="line">			dfs(step+<span class="number">1</span>);</span><br><span class="line">			book[i]=<span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;		</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>让我们来深究 DFS 内的具体过程</p>
-</blockquote>
-<ul>
-<li><code>函数层数和每层函数保留的 i 相等</code></li>
-<li><code>每一层函数往数组中放入的数即为 i</code></li>
-<li><code>i 的大小也决定了是否能够继续for循环继续放数</code></li>
-<li><code>return 的过程中必然将上层函数中放入的数收回</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>搜索🔍</tag>
-        <tag>DFS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>选数</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/X_%E9%80%89%E6%95%B0/</url>
     <content><![CDATA[<p><strong>题目：选数</strong></p>
@@ -1775,6 +1686,95 @@ eg： 1 2 3 4 5<br>
         <tag>算法</tag>
         <tag>搜索🔍</tag>
         <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>全排列</title>
+    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/Q_%E5%85%A8%E6%8E%92%E5%88%97/</url>
+    <content><![CDATA[<h3 id="全排列问题">全排列问题</h3>
+<p><strong>完整代码：</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>], book[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> step)</span> </span>{</span><br><span class="line">	<span class="keyword">if</span> (step == n + <span class="number">1</span>) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) {</span><br><span class="line">		<span class="keyword">if</span> (book[i] == <span class="number">0</span>) {</span><br><span class="line">			a[step] = i;</span><br><span class="line">			book[i] = <span class="number">1</span>;</span><br><span class="line">			dfs(step + <span class="number">1</span>);</span><br><span class="line">			book[i] = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	dfs(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>核心代码（DFS 部分）：</strong></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> step)</span></span>{</span><br><span class="line">	<span class="keyword">if</span>(step==n+<span class="number">1</span>){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>,a[i]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++){</span><br><span class="line">		<span class="keyword">if</span>(book[i]==<span class="number">0</span>){</span><br><span class="line">			a[step]=i;</span><br><span class="line">			book[i]=<span class="number">1</span>;</span><br><span class="line">			dfs(step+<span class="number">1</span>);</span><br><span class="line">			book[i]=<span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;		</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>让我们来深究 DFS 内的具体过程</p>
+</blockquote>
+<ul>
+<li><code>函数层数和每层函数保留的 i 相等</code></li>
+<li><code>每一层函数往数组中放入的数即为 i</code></li>
+<li><code>i 的大小也决定了是否能够继续for循环继续放数</code></li>
+<li><code>return 的过程中必然将上层函数中放入的数收回</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>搜索🔍</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>迷宫最短路径问题</title>
+    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E6%90%9C%E7%B4%A2%F0%9F%94%8D/M_%E8%BF%B7%E5%AE%AB%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="迷宫最短路径问题">迷宫最短路径问题</h3>
+<h2 id="完整代码如下：">完整代码如下：</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;<span class="comment">//横坐标</span></span><br><span class="line">	<span class="keyword">int</span> y;<span class="comment">//纵坐标</span></span><br><span class="line">	<span class="keyword">int</span> s;<span class="comment">//步数</span></span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">que</span>[2501];</span></span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">51</span>][<span class="number">51</span>] = { <span class="number">0</span> }, book[<span class="number">51</span>][<span class="number">51</span>] = { <span class="number">0</span> };</span><br><span class="line">	<span class="keyword">int</span> next[<span class="number">4</span>][<span class="number">2</span>] = { {<span class="number">0</span>,<span class="number">1</span>} ,{<span class="number">1</span>,<span class="number">0</span>} ,{<span class="number">0</span>,<span class="number">-1</span>}, {<span class="number">-1</span>,<span class="number">0</span>} };</span><br><span class="line">	<span class="keyword">int</span> head, tail;<span class="comment">//引入队列</span></span><br><span class="line">	<span class="keyword">int</span> i, j, k, m, n, startx, starty, p, q, tx, ty, flag;</span><br><span class="line">	<span class="comment">//读入目标迷宫大小</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="comment">//读入迷宫</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i][j]);</span><br><span class="line">	<span class="comment">//读入起点和终点</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d %d %d"</span>, &amp;startx, &amp;starty, &amp;p, &amp;q);</span><br><span class="line">	<span class="comment">//队列初始化</span></span><br><span class="line">	head = <span class="number">0</span>;</span><br><span class="line">	tail = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//起点入队</span></span><br><span class="line">	que[<span class="number">1</span>].x = startx;</span><br><span class="line">	que[<span class="number">1</span>].y = starty;</span><br><span class="line">	que[<span class="number">1</span>].s = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//标记起点</span></span><br><span class="line">	book[startx][starty] = <span class="number">1</span>;</span><br><span class="line">	flag = <span class="number">0</span>;<span class="comment">//标识符</span></span><br><span class="line">	<span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">	{</span><br><span class="line">		head++;</span><br><span class="line">		<span class="keyword">for</span> (k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">//父单元按规律向4个方向拓展</span></span><br><span class="line">			tx = que[head].x + next[k][<span class="number">0</span>];</span><br><span class="line">			ty = que[head].y + next[k][<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span> (tx&lt;<span class="number">1</span> || tx&gt;n || ty&lt;<span class="number">1</span> || ty&gt;m)</span><br><span class="line">				<span class="keyword">continue</span>;<span class="comment">//越界则重新试探</span></span><br><span class="line">			<span class="keyword">if</span> (a[tx][ty] == <span class="number">0</span> &amp;&amp; book[tx][ty] == <span class="number">0</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="comment">//拓展成功则标记拓展的点并将其入队，累加步数。</span></span><br><span class="line">				tail++;</span><br><span class="line">				book[tx][ty] = <span class="number">1</span>;</span><br><span class="line">				que[tail].x = tx;</span><br><span class="line">				que[tail].y = ty;</span><br><span class="line">				que[tail].s = que[head].s + <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//拓展到目标点时结束拓展调用标识符结束拓展</span></span><br><span class="line">			<span class="keyword">if</span> (tx == p &amp;&amp; ty == q)</span><br><span class="line">			{</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="comment">//若成功标记则结束while循环</span></span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, que[tail].s);</span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="思路详解">思路详解</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第一步：定义note结构体</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>我们要记录最路径，路径大小和经过的点数有关<br>
+顾名思义我们需要在点上做文章<br>
+一个点拥有（x，y）坐标<br>
+我们定义一个含距离的关于点的结构体<br>
+如下：</p>
+</blockquote>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">int</span> x;<span class="comment">//横坐标</span></span><br><span class="line">	<span class="keyword">int</span> y;<span class="comment">//纵坐标</span></span><br><span class="line">	<span class="keyword">int</span> s;<span class="comment">//步数</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>点的个数和迷宫大小有关<br>
+这里我们取最大值如下：</p>
+</blockquote>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">note</span> <span class="title">que</span>[2501];</span></span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第二步：引入队列的思维</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>BFS 搜索🔍是由父层向下遍历探索所有可能的子结构<br>
+探索成功后之前的子层成为了新的父层继续上述操作<br>
+不由可以联想到<br>
+父到子 &gt;&gt; head 向下试探，成功则 tail++<br>
+子成父 &gt;&gt; head++<br>
+如下：</p>
+</blockquote>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (head &lt; tail)</span><br><span class="line">	{</span><br><span class="line">		head++；<span class="comment">//将1单元成为父单元</span></span><br><span class="line">		<span class="keyword">for</span> (k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">//父单元按规律向4个方向拓展</span></span><br><span class="line">			tx = que[head].x + next[k][<span class="number">0</span>];</span><br><span class="line">			ty = que[head].y + next[k][<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span> (tx&lt;<span class="number">1</span> || tx&gt;n || ty&lt;<span class="number">1</span> || ty&gt;m)</span><br><span class="line">				<span class="keyword">continue</span>;<span class="comment">//越界则重新试探</span></span><br><span class="line">			<span class="keyword">if</span> (a[tx][ty] == <span class="number">0</span> &amp;&amp; book[tx][ty] == <span class="number">0</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="comment">//拓展成功则标记拓展的点并将其入队，累加步数。</span></span><br><span class="line">				tail++;<span class="comment">//扩充队列,将新的点入队</span></span><br><span class="line">				book[tx][ty] = <span class="number">1</span>;</span><br><span class="line">				que[tail].x = tx;</span><br><span class="line">				que[tail].y = ty;</span><br><span class="line">				que[tail].s = que[head].s + <span class="number">1</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//拓展到目标点时结束拓展调用标识符结束拓展</span></span><br><span class="line">			<span class="keyword">if</span> (tx == p &amp;&amp; ty == q)</span><br><span class="line">			{</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="comment">//若成功标记则结束while循环</span></span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">第三步：最小路径</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>问题 1：为什么拓展到终点时必为最短路径？<br>
+解答：因为每一层拓展均为步数加 1，所以拓展的过程中步数是一样累加的<br>
+并没有多走的情况，同步出发，并且只要到终点后 while 循环便会停止，所得 &gt; 一定为最短路径</p>
+</blockquote>
+<blockquote>
+<p>问题 2：输出最短路径时为什么要用 <strong>que[tail].s</strong> ?<br>
+解答：我们刚开始定义 tail 为 1，tail 表示队尾位置，成功拓展至终点后 ， <strong>终点即为队尾位置</strong>即 que [tail].s;</p>
+</blockquote>
+<hr>
+<h2 id="summary："><code>summary：</code></h2>
+<p>（1）本题和 <a href="https://blog.csdn.net/Arthur_1122/article/details/116764674">BFS - 马的遍历</a>异同之处？</p>
+<blockquote>
+<p>本题：将距离 s 定义在结构体之内，使得每一个节点均含有到此的最小步数<br>
+other：马的遍历是将距离放在一个二维数组里面，二维数组的下标为位置坐标，我们需要关注的是起点位置为队列的首位，符合以下对应关系：<br>
+坐标：(sx,sy)&gt;&gt;(qun [1].x,qun [1].y) 即队列第一单元<br>
+步数：a [sx][sy]=0&gt;&gt;a [qun [1].x][qun [1].y]=0 即队列第一单元对应 0 步</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>搜索🔍</tag>
+        <tag>BFS</tag>
       </tags>
   </entry>
   <entry>
