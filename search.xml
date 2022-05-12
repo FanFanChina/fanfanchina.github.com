@@ -80,38 +80,6 @@
       </tags>
   </entry>
   <entry>
-    <title>QT</title>
-    <url>/2022/02/25/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/QT/</url>
-    <content><![CDATA[<h1><code>QT安装下载</code></h1>
-<p><strong>略</strong></p>
-<h1><code>使用介绍</code></h1>
-<p><strong>01.三大基类：widget派生出mainwindows和diglog</strong></p>
-<p><strong>02.名称和路径不要中文</strong></p>
-<p>**03.自动对齐 ctrl+i、注释 ctrl+/ **</p>
-<p><strong>04.同名文件切换F4</strong></p>
-<h1><code>第一个QT程序</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mywidget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span>             <span class="comment">//应用程序的类</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span>    <span class="comment">//argc命令行变量的数量、argv[]命令行变量数组</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;     <span class="comment">//QApplication a，Q应用程序的对象a，有且仅有一个</span></span><br><span class="line">    myWidget w;                     <span class="comment">//类myWidget的对象w</span></span><br><span class="line">    w.<span class="built_in">show</span>();                       <span class="comment">//w对象的方法</span></span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();                <span class="comment">//让a进入消息循环，以便于窗口一直存在</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>按钮</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">//创建一个按钮</span></span><br><span class="line">    QPushButton * btn= <span class="keyword">new</span> QPushButton;</span><br><span class="line">    <span class="comment">//btn-&gt;show();//以顶层方式弹出窗口控件</span></span><br><span class="line">    <span class="comment">//设置按钮的依赖对象</span></span><br><span class="line">    btn-&gt;<span class="built_in">setParent</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//显示文本</span></span><br><span class="line">    btn-&gt;<span class="built_in">setText</span>(<span class="string">"你好啊"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//第二种写法+重置窗口大小</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"hahaha"</span>,<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);	<span class="comment">//重置窗口大小</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">//弊端：按照控件的大小创造窗口的大小</span></span><br><span class="line"><span class="comment">//解决方法:重置窗口大小</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//同时显示两个按钮</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>); <span class="comment">//如果不移动开的话会覆盖掉</span></span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>窗口</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//设置窗口标题</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"你好"</span>);  <span class="comment">//设置窗口标题</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//设置固定窗口大小</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"你好"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);<span class="comment">//设置固定窗口大小，这样可以不用重置窗口大小</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//坐标系:左上角为原点、向右为x轴，向下为y轴</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//小练习</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"这是一个假的按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"你看，╰(*°▽°*)╯我不就是一个button 吗 ？"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn1-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">200</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//点击按钮关闭窗口</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    QPushButton *btn = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"点击关闭窗口"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn-&gt;<span class="built_in">move</span>(<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">connect</span>(btn,&amp;QPushButton::clicked,<span class="keyword">this</span>,&amp;myWidget::close);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>自定义信号</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//老师</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Teacher</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="comment">//自定义信号，返回值为空</span></span><br><span class="line">    <span class="comment">//只需要声明，不需要实现</span></span><br><span class="line">    <span class="comment">//可以有参数，可以重载</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hungry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//学生</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Student</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="comment">//返回值为空,需要声明,需要实现</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">treate</span><span class="params">()</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//treat函数实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Student::treate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">"我请客！！！"</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//窗口定义两个对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myWidget</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT        <span class="comment">//Q_OBJECT宏，允许对象使用信号和槽机制</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">myWidget</span>(QWidget *parent = <span class="number">0</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">classIsOver</span><span class="params">()</span></span>;</span><br><span class="line">    ~<span class="built_in">myWidget</span>();</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">isOver</span><span class="params">()</span></span>;</span><br><span class="line">    Teacher *t;</span><br><span class="line">    Student *s;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//窗口定义触发函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myWidget::isOver</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    emit t-&gt;<span class="built_in">hungry</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化类、信号连接、触发信号</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent) : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;s = <span class="keyword">new</span> <span class="built_in">Student</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>-&gt;t = <span class="keyword">new</span> <span class="built_in">Teacher</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">connect</span>(t,&amp;Teacher::hungry,s,&amp;Student::treate);</span><br><span class="line">    <span class="built_in">isOver</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>B_编程语言</category>
-      </categories>
-      <tags>
-        <tag>QT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python</title>
     <url>/2021/09/16/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/</url>
     <content><![CDATA[<h1><code>环境搭建</code></h1>
@@ -203,6 +171,104 @@
       </tags>
   </entry>
   <entry>
+    <title>QT</title>
+    <url>/2022/02/25/B_%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/QT/</url>
+    <content><![CDATA[<h1><code>QT安装下载</code></h1>
+<p><strong>略</strong></p>
+<h1><code>使用介绍</code></h1>
+<p><strong>01.三大基类：widget派生出mainwindows和diglog</strong></p>
+<p><strong>02.名称和路径不要中文</strong></p>
+<p>**03.自动对齐 ctrl+i、注释 ctrl+/ **</p>
+<p><strong>04.同名文件切换F4</strong></p>
+<h1><code>第一个QT程序</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mywidget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span>             <span class="comment">//应用程序的类</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span>    <span class="comment">//argc命令行变量的数量、argv[]命令行变量数组</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;     <span class="comment">//QApplication a，Q应用程序的对象a，有且仅有一个</span></span><br><span class="line">    myWidget w;                     <span class="comment">//类myWidget的对象w</span></span><br><span class="line">    w.<span class="built_in">show</span>();                       <span class="comment">//w对象的方法</span></span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();                <span class="comment">//让a进入消息循环，以便于窗口一直存在</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>按钮</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">//创建一个按钮</span></span><br><span class="line">    QPushButton * btn= <span class="keyword">new</span> QPushButton;</span><br><span class="line">    <span class="comment">//btn-&gt;show();//以顶层方式弹出窗口控件</span></span><br><span class="line">    <span class="comment">//设置按钮的依赖对象</span></span><br><span class="line">    btn-&gt;<span class="built_in">setParent</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//显示文本</span></span><br><span class="line">    btn-&gt;<span class="built_in">setText</span>(<span class="string">"你好啊"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//第二种写法+重置窗口大小</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"hahaha"</span>,<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);	<span class="comment">//重置窗口大小</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">//弊端：按照控件的大小创造窗口的大小</span></span><br><span class="line"><span class="comment">//解决方法:重置窗口大小</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//同时显示两个按钮</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>); <span class="comment">//如果不移动开的话会覆盖掉</span></span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>窗口</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//设置窗口标题</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">resize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"你好"</span>);  <span class="comment">//设置窗口标题</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//设置固定窗口大小</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第一个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"第二个按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"你好"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);<span class="comment">//设置固定窗口大小，这样可以不用重置窗口大小</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//坐标系:左上角为原点、向右为x轴，向下为y轴</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//小练习</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    QPushButton *btn1=<span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"这是一个假的按钮"</span>,<span class="keyword">this</span>);</span><br><span class="line">    QPushButton *btn2 = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"你看，╰(*°▽°*)╯我不就是一个button 吗 ？"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn1-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">    btn2-&gt;<span class="built_in">move</span>(<span class="number">100</span>,<span class="number">200</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//点击按钮关闭窗口</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line">    QPushButton *btn = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">"点击关闭窗口"</span>,<span class="keyword">this</span>);</span><br><span class="line">    btn-&gt;<span class="built_in">move</span>(<span class="number">200</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="built_in">connect</span>(btn,&amp;QPushButton::clicked,<span class="keyword">this</span>,&amp;myWidget::close);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>自定义信号</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//老师</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Teacher</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="comment">//自定义信号，返回值为空</span></span><br><span class="line">    <span class="comment">//只需要声明，不需要实现</span></span><br><span class="line">    <span class="comment">//可以有参数，可以重载</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hungry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//学生</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Student</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="comment">//返回值为空,需要声明,需要实现</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">treate</span><span class="params">()</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//treat函数实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Student::treate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">"我请客！！！"</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//窗口定义两个对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myWidget</span> :</span> <span class="keyword">public</span> QWidget</span><br><span class="line">{</span><br><span class="line">    Q_OBJECT        <span class="comment">//Q_OBJECT宏，允许对象使用信号和槽机制</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">myWidget</span>(QWidget *parent = <span class="number">0</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">classIsOver</span><span class="params">()</span></span>;</span><br><span class="line">    ~<span class="built_in">myWidget</span>();</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">isOver</span><span class="params">()</span></span>;</span><br><span class="line">    Teacher *t;</span><br><span class="line">    Student *s;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//窗口定义触发函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myWidget::isOver</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    emit t-&gt;<span class="built_in">hungry</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化类、信号连接、触发信号</span></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent) : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">{</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setWindowTitle</span>(<span class="string">"piupiupiupiu"</span>);</span><br><span class="line">    <span class="built_in">setFixedSize</span>(<span class="number">600</span>,<span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;s = <span class="keyword">new</span> <span class="built_in">Student</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>-&gt;t = <span class="keyword">new</span> <span class="built_in">Teacher</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">connect</span>(t,&amp;Teacher::hungry,s,&amp;Student::treate);</span><br><span class="line">    <span class="built_in">isOver</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>B_编程语言</category>
+      </categories>
+      <tags>
+        <tag>QT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>积极心理学（一）</title>
+    <url>/2021/09/16/J_%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/1/</url>
+    <content><![CDATA[<h2 id="积极心理学"><a href="https://open.163.com/newview/movie/free?pid=M6HV755O6&amp;mid=M6HV8DF19">积极心理学</a></h2>
+<h2 id="引言"><code>引言</code></h2>
+<p><strong><code>《积极心理学》</code>是一门以<code>健康模型</code>为核心的课程，相对于传统的<code>疾病模型</code>，积极心理学更注重于对<code>个人积极性</code>的培养，而并不是直接面对<code>心理疾病</code>。你生病了，只是因为你的生活还<code>不够</code>健康，你不去<code>追求</code>那些使你健康的东西，积极心理学可以帮助我们达到那种<code>充满激情，紧张的生活状态</code>。</strong></p>
+<h2 id="一切的前提"><code>一切的前提</code></h2>
+<p><strong>学习本课程最重要的不是理论，而是学习完理论之后的<code>实践</code>环节，你只需要做出<code>一种努力</code>，即<code>应用</code>的努力</strong></p>
+<h2 id="安静"><code>安静</code></h2>
+<h3 id="理论"><code>理论</code></h3>
+<p><strong><code>安静</code>是我们文化所<code>缺失</code>的一部分，我们会忍不住<code>打破</code>沉默。</strong><br>
+<strong><code>安静</code>是一种<code>最深</code>层次的<code>学习媒介</code>，<code>记忆再现</code>的过程，使我们<code>区分</code>出什么是<code>最重要的</code>，什么是<code>不那重要的</code></strong><br>
+<strong><code>安静</code>给了我们经历过后<code>反省</code>自己所闻的<code>机会</code></strong></p>
+<h3 id="论据"><code>论据</code></h3>
+<p><strong>《教学的勇气》</strong><br>
+<strong>有酒和没酒的<code>小鼠走迷宫</code></strong><br>
+<strong>崇尚安静的<code>印第安人</code>文化</strong></p>
+<h3 id="实践"><code>实践</code></h3>
+<p><strong>内省：</strong><br>
+<strong>一、找一个<code>安静</code>的环境，仔细<code>回顾</code>之前的经历（学习经历，交流经历等等）</strong><br>
+<strong>二、仔细想想什么是<code>最重要</code>的，哪些是<code>很重要</code>的，哪些是<code>不那么重要</code>的</strong><br>
+<strong>注：一步骤和二步骤<code>交替进行</code>，直到自己认为达到了<code>内省</code>的效果！</strong></p>
+<hr>
+<h2 id="Transform"><code>Transform</code></h2>
+<h3 id="理论-v2"><code>理论</code></h3>
+<p><strong>大多数教育只是在<code>传递信息</code>，这是远远不够的，关键在于<code>接收信息</code>的容器的<code>形状</code>，信息是<code>客观</code>存在的，<code>形状</code>决定了我们的自尊水平和快乐水平！</strong></p>
+<h3 id="论据-v2"><code>论据</code></h3>
+<p><strong>比赛目标是前三名，结果是第八名的两种解读 —— 解读模型的重要性</strong></p>
+<h3 id="实践-v2"><code>实践</code></h3>
+<p><strong>一、构建解读模型：当我们教别人一些东西时，我们不光要<code>传递信息</code>，还要想办法为信息的理解<code>构建</code>一种<code>解读模型</code></strong><br>
+<strong>二、失败变成机遇：失败后<code>自省</code> (见<code>安静</code>的理念)，让我们看看我们能学到什么！</strong></p>
+<hr>
+<h2 id="关于多余的石头"><code>关于多余的石头</code></h2>
+<h3 id="引言-v2"><code>引言</code></h3>
+<p><strong>《大卫》—— 米开朗基罗</strong></p>
+<h3 id="真相"><code>真相</code></h3>
+<p><strong>对<code>失败的恐惧</code>，对<code>成功的畏惧</code>，<code>完美主义</code>等等不是与生俱来的，在世经历让我们被<code>限制</code>，使我们无法窥视自己的内心，社会的<code>教条</code>，长辈的<code>训诫</code>，有时候会是那<code>多余的石头</code>，将自我<code>封闭</code>掉。<code>凿掉多余的石头</code>像极了人生的第三境界 —— <code>看山是山，看水是水！</code></strong></p>
+<hr>
+<h2 id="问题的力量"><code>问题的力量</code></h2>
+<h3 id="理论-v3"><code>理论</code></h3>
+<p><strong><code>教育</code>的目的在于让一个人<code>不断地</code>发问！</strong><br>
+<strong><code>问题</code>制造<code>现实</code>，制造<code>可能性</code>，一个<code>问题</code>引起一场<code>探索</code></strong><br>
+<strong>一个<code>问题</code>能够将我们的<code>专注力</code>聚焦到某个<code>现实中</code>，是<code>聚焦神器</code></strong></p>
+<h3 id="论据-v3"><code>论据</code></h3>
+<p><strong>由<code>致病模型</code>到<code>建康模型</code>的转变使<code>积极心理学</code>有了长足的<code>进展</code></strong><br>
+<strong><code>几何图形</code>的数量</strong></p>
+<h3 id="实践-v3"><code>实践</code></h3>
+<p><strong><code>问和答</code>：作为<code>教育者</code>的身份时，不仅要让你的<code>教育对象多问</code>，及时提出问题！并且多对教育者抛出问题！</strong><br>
+<strong><code>自问</code>：当你要<code>学习专注</code>一件事时，试着对其不断<code>提出问题</code>，能够让我们<code>迅速</code>专注于所做的<code>事情</code>！</strong><br>
+<strong><code>扩大与兼顾</code>：当问题所<code>关注的</code>事情只是<code>一件</code>或者所关注的事情具有<code>正反面</code>时，尝试<code>扩大范围</code> or 兼顾<code>正反面</code>！</strong></p>
+<hr>
+<h2 id="没人会来的"><code>没人会来的</code></h2>
+<h3 id="理论-v4"><code>理论</code></h3>
+<p><strong><code>没有人</code>会来到你的生活中<code>帮你</code>解决你所遇到的<code>问题</code>，一切的<code>成败</code>都靠你<code>自己</code>，教育者的存在是为了我们个人的前进<code>创造条件</code>，一切都要靠我们<code>自身</code>做出努力！</strong></p>
+<h3 id="实践-v4"><code>实践</code></h3>
+<p><strong>常常问自己，自己<code>改变了</code>什么？</strong>、<br>
+<strong>思考自己需要在<code>哪些方面做出努力</code></strong><br>
+<strong>时刻认识自己才是自己生活的<code>缔造者</code>，做出<code>行动</code>，<code>天高任鸟飞</code>！</strong></p>
+]]></content>
+      <categories>
+        <category>J_积极心理学</category>
+      </categories>
+      <tags>
+        <tag>心理学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>积极心理学（二）</title>
     <url>/2021/09/17/J_%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/2/</url>
     <content><![CDATA[<h2 id="准许为人"><code>准许为人</code></h2>
@@ -256,6 +322,81 @@
 <strong>阅读喜欢的书籍，积极的电影，听喜欢的音乐(不要当作背景音乐，要仔细专注地去听，感受你的喜爱之情)</strong><br>
 <strong>将自己平时生活所说的消极词汇换为积极词汇</strong></p>
 <hr>
+]]></content>
+      <categories>
+        <category>J_积极心理学</category>
+      </categories>
+      <tags>
+        <tag>心理学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>积极心理学（三）</title>
+    <url>/2021/09/19/J_%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/3/</url>
+    <content><![CDATA[<h2 id="有关自助书籍的真相"><code>有关自助书籍的真相</code></h2>
+<p><strong>（一）《思考致富》《秘密》《正面思考的力量》等书籍过分强调了思考创造现实，创造成功这一事实。但这只是等式的<code>一半</code>，成功除了相信，还离不开<code>辛勤的工作</code>。如果仅仅依靠相信，言过其实，效果甚微，甚至造成毁灭性的后果。</strong></p>
+<p><strong>（二）苏格兰皇家银行《正面思考》短片</strong></p>
+<h2 id="不可忽视的精神力量"><code>不可忽视的精神力量</code></h2>
+<h3 id="论据"><code>论据</code></h3>
+<p><strong>安慰剂效应</strong><br>
+<strong>失效的吐根</strong><br>
+<strong>过敏植物</strong></p>
+<h2 id="精神力量强大的科学依据"><code>精神力量强大的科学依据</code></h2>
+<h3 id="理论"><code>理论</code></h3>
+<p><strong>动力+重构一致性是我们精神力量强大大原因。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">重构图式和外界信息一致性的4种方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>①更新图式（积极/消极）</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>②忽视外界信息（积极/消极）</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>③主动验证，寻找符合我们图式的证据（积极/消极）</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>④创造新的现实（积极/消极）</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="论据-v2"><code>论据</code></h3>
+<p><strong>（一）Roger Banister相信他能跑进4分钟以内，干劲十足，最终④创造了新的现实。</strong></p>
+<p><strong>（二）爱迪生对失败5000次用主观解读来①更新他的图式并④创造新的现实</strong></p>
+<p><strong>（三）宣传人类在六十年代末登月④创造新的现实</strong></p>
+<p><strong>Note：成功别无他法，我们都是从失败走向成功，相信自己可以成功并干劲十足地去创造属于我们的新的现实</strong></p>
+<h2 id="目标设定上的区别"><code>目标设定上的区别</code></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">悲观主义者</th>
+<th style="text-align:center">乐观主义者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>短期</strong></td>
+<td style="text-align:center"><strong>现实</strong></td>
+<td style="text-align:center"><strong>不现实</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>长期</strong></td>
+<td style="text-align:center"><strong>现实</strong></td>
+<td style="text-align:center"><strong>现实</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="解释"><code>解释</code></h3>
+<p><strong>（1）悲观主义者信念低下，所以他们消极地面对他们的目标，最终失败了他会向人们解释，他本来就说过了他做不好，偶尔的成功他也会认为是运气使然，所以从短期还是长期来看他们的目标一直很现实。</strong><br>
+<strong>（2）乐观主义者拥有很高的信念于是设立很高的目标，从短期来看他的目标很不现实，但他从失败中学习，一次又一次，认为自己会做到，并辛勤劳动，最终他实现了他的目标，所以从长期来看他们的目标又是现实的</strong></p>
+<h3 id="实践"><code>实践</code></h3>
+<p><strong>试着像乐观者一样思考，设立短期不现实而长期现实的目标，从失败中学习，创造属于你的现实。</strong></p>
 ]]></content>
       <categories>
         <category>J_积极心理学</category>
@@ -431,144 +572,16 @@
       </tags>
   </entry>
   <entry>
-    <title>积极心理学（一）</title>
-    <url>/2021/09/16/J_%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/1/</url>
-    <content><![CDATA[<h2 id="积极心理学"><a href="https://open.163.com/newview/movie/free?pid=M6HV755O6&amp;mid=M6HV8DF19">积极心理学</a></h2>
-<h2 id="引言"><code>引言</code></h2>
-<p><strong><code>《积极心理学》</code>是一门以<code>健康模型</code>为核心的课程，相对于传统的<code>疾病模型</code>，积极心理学更注重于对<code>个人积极性</code>的培养，而并不是直接面对<code>心理疾病</code>。你生病了，只是因为你的生活还<code>不够</code>健康，你不去<code>追求</code>那些使你健康的东西，积极心理学可以帮助我们达到那种<code>充满激情，紧张的生活状态</code>。</strong></p>
-<h2 id="一切的前提"><code>一切的前提</code></h2>
-<p><strong>学习本课程最重要的不是理论，而是学习完理论之后的<code>实践</code>环节，你只需要做出<code>一种努力</code>，即<code>应用</code>的努力</strong></p>
-<h2 id="安静"><code>安静</code></h2>
-<h3 id="理论"><code>理论</code></h3>
-<p><strong><code>安静</code>是我们文化所<code>缺失</code>的一部分，我们会忍不住<code>打破</code>沉默。</strong><br>
-<strong><code>安静</code>是一种<code>最深</code>层次的<code>学习媒介</code>，<code>记忆再现</code>的过程，使我们<code>区分</code>出什么是<code>最重要的</code>，什么是<code>不那重要的</code></strong><br>
-<strong><code>安静</code>给了我们经历过后<code>反省</code>自己所闻的<code>机会</code></strong></p>
-<h3 id="论据"><code>论据</code></h3>
-<p><strong>《教学的勇气》</strong><br>
-<strong>有酒和没酒的<code>小鼠走迷宫</code></strong><br>
-<strong>崇尚安静的<code>印第安人</code>文化</strong></p>
-<h3 id="实践"><code>实践</code></h3>
-<p><strong>内省：</strong><br>
-<strong>一、找一个<code>安静</code>的环境，仔细<code>回顾</code>之前的经历（学习经历，交流经历等等）</strong><br>
-<strong>二、仔细想想什么是<code>最重要</code>的，哪些是<code>很重要</code>的，哪些是<code>不那么重要</code>的</strong><br>
-<strong>注：一步骤和二步骤<code>交替进行</code>，直到自己认为达到了<code>内省</code>的效果！</strong></p>
-<hr>
-<h2 id="Transform"><code>Transform</code></h2>
-<h3 id="理论-v2"><code>理论</code></h3>
-<p><strong>大多数教育只是在<code>传递信息</code>，这是远远不够的，关键在于<code>接收信息</code>的容器的<code>形状</code>，信息是<code>客观</code>存在的，<code>形状</code>决定了我们的自尊水平和快乐水平！</strong></p>
-<h3 id="论据-v2"><code>论据</code></h3>
-<p><strong>比赛目标是前三名，结果是第八名的两种解读 —— 解读模型的重要性</strong></p>
-<h3 id="实践-v2"><code>实践</code></h3>
-<p><strong>一、构建解读模型：当我们教别人一些东西时，我们不光要<code>传递信息</code>，还要想办法为信息的理解<code>构建</code>一种<code>解读模型</code></strong><br>
-<strong>二、失败变成机遇：失败后<code>自省</code> (见<code>安静</code>的理念)，让我们看看我们能学到什么！</strong></p>
-<hr>
-<h2 id="关于多余的石头"><code>关于多余的石头</code></h2>
-<h3 id="引言-v2"><code>引言</code></h3>
-<p><strong>《大卫》—— 米开朗基罗</strong></p>
-<h3 id="真相"><code>真相</code></h3>
-<p><strong>对<code>失败的恐惧</code>，对<code>成功的畏惧</code>，<code>完美主义</code>等等不是与生俱来的，在世经历让我们被<code>限制</code>，使我们无法窥视自己的内心，社会的<code>教条</code>，长辈的<code>训诫</code>，有时候会是那<code>多余的石头</code>，将自我<code>封闭</code>掉。<code>凿掉多余的石头</code>像极了人生的第三境界 —— <code>看山是山，看水是水！</code></strong></p>
-<hr>
-<h2 id="问题的力量"><code>问题的力量</code></h2>
-<h3 id="理论-v3"><code>理论</code></h3>
-<p><strong><code>教育</code>的目的在于让一个人<code>不断地</code>发问！</strong><br>
-<strong><code>问题</code>制造<code>现实</code>，制造<code>可能性</code>，一个<code>问题</code>引起一场<code>探索</code></strong><br>
-<strong>一个<code>问题</code>能够将我们的<code>专注力</code>聚焦到某个<code>现实中</code>，是<code>聚焦神器</code></strong></p>
-<h3 id="论据-v3"><code>论据</code></h3>
-<p><strong>由<code>致病模型</code>到<code>建康模型</code>的转变使<code>积极心理学</code>有了长足的<code>进展</code></strong><br>
-<strong><code>几何图形</code>的数量</strong></p>
-<h3 id="实践-v3"><code>实践</code></h3>
-<p><strong><code>问和答</code>：作为<code>教育者</code>的身份时，不仅要让你的<code>教育对象多问</code>，及时提出问题！并且多对教育者抛出问题！</strong><br>
-<strong><code>自问</code>：当你要<code>学习专注</code>一件事时，试着对其不断<code>提出问题</code>，能够让我们<code>迅速</code>专注于所做的<code>事情</code>！</strong><br>
-<strong><code>扩大与兼顾</code>：当问题所<code>关注的</code>事情只是<code>一件</code>或者所关注的事情具有<code>正反面</code>时，尝试<code>扩大范围</code> or 兼顾<code>正反面</code>！</strong></p>
-<hr>
-<h2 id="没人会来的"><code>没人会来的</code></h2>
-<h3 id="理论-v4"><code>理论</code></h3>
-<p><strong><code>没有人</code>会来到你的生活中<code>帮你</code>解决你所遇到的<code>问题</code>，一切的<code>成败</code>都靠你<code>自己</code>，教育者的存在是为了我们个人的前进<code>创造条件</code>，一切都要靠我们<code>自身</code>做出努力！</strong></p>
-<h3 id="实践-v4"><code>实践</code></h3>
-<p><strong>常常问自己，自己<code>改变了</code>什么？</strong>、<br>
-<strong>思考自己需要在<code>哪些方面做出努力</code></strong><br>
-<strong>时刻认识自己才是自己生活的<code>缔造者</code>，做出<code>行动</code>，<code>天高任鸟飞</code>！</strong></p>
+    <title>Blog客户端（APP）</title>
+    <url>/2021/09/16/S_%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/Blog%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+    <content><![CDATA[<h2 id="下载地址"><code>下载地址</code></h2>
+<p><a href="https://www.aliyundrive.com/s/YXjaTZ1ehcL"><strong>Blog 客户端 (点击下载)</strong></a></p>
 ]]></content>
       <categories>
-        <category>J_积极心理学</category>
+        <category>S_实践项目</category>
       </categories>
       <tags>
-        <tag>心理学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>积极心理学（三）</title>
-    <url>/2021/09/19/J_%E7%A7%AF%E6%9E%81%E5%BF%83%E7%90%86%E5%AD%A6/3/</url>
-    <content><![CDATA[<h2 id="有关自助书籍的真相"><code>有关自助书籍的真相</code></h2>
-<p><strong>（一）《思考致富》《秘密》《正面思考的力量》等书籍过分强调了思考创造现实，创造成功这一事实。但这只是等式的<code>一半</code>，成功除了相信，还离不开<code>辛勤的工作</code>。如果仅仅依靠相信，言过其实，效果甚微，甚至造成毁灭性的后果。</strong></p>
-<p><strong>（二）苏格兰皇家银行《正面思考》短片</strong></p>
-<h2 id="不可忽视的精神力量"><code>不可忽视的精神力量</code></h2>
-<h3 id="论据"><code>论据</code></h3>
-<p><strong>安慰剂效应</strong><br>
-<strong>失效的吐根</strong><br>
-<strong>过敏植物</strong></p>
-<h2 id="精神力量强大的科学依据"><code>精神力量强大的科学依据</code></h2>
-<h3 id="理论"><code>理论</code></h3>
-<p><strong>动力+重构一致性是我们精神力量强大大原因。</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">重构图式和外界信息一致性的4种方式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>①更新图式（积极/消极）</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>②忽视外界信息（积极/消极）</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>③主动验证，寻找符合我们图式的证据（积极/消极）</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>④创造新的现实（积极/消极）</strong></td>
-</tr>
-</tbody>
-</table>
-<h3 id="论据-v2"><code>论据</code></h3>
-<p><strong>（一）Roger Banister相信他能跑进4分钟以内，干劲十足，最终④创造了新的现实。</strong></p>
-<p><strong>（二）爱迪生对失败5000次用主观解读来①更新他的图式并④创造新的现实</strong></p>
-<p><strong>（三）宣传人类在六十年代末登月④创造新的现实</strong></p>
-<p><strong>Note：成功别无他法，我们都是从失败走向成功，相信自己可以成功并干劲十足地去创造属于我们的新的现实</strong></p>
-<h2 id="目标设定上的区别"><code>目标设定上的区别</code></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">悲观主义者</th>
-<th style="text-align:center">乐观主义者</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>短期</strong></td>
-<td style="text-align:center"><strong>现实</strong></td>
-<td style="text-align:center"><strong>不现实</strong></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>长期</strong></td>
-<td style="text-align:center"><strong>现实</strong></td>
-<td style="text-align:center"><strong>现实</strong></td>
-</tr>
-</tbody>
-</table>
-<h3 id="解释"><code>解释</code></h3>
-<p><strong>（1）悲观主义者信念低下，所以他们消极地面对他们的目标，最终失败了他会向人们解释，他本来就说过了他做不好，偶尔的成功他也会认为是运气使然，所以从短期还是长期来看他们的目标一直很现实。</strong><br>
-<strong>（2）乐观主义者拥有很高的信念于是设立很高的目标，从短期来看他的目标很不现实，但他从失败中学习，一次又一次，认为自己会做到，并辛勤劳动，最终他实现了他的目标，所以从长期来看他们的目标又是现实的</strong></p>
-<h3 id="实践"><code>实践</code></h3>
-<p><strong>试着像乐观者一样思考，设立短期不现实而长期现实的目标，从失败中学习，创造属于你的现实。</strong></p>
-]]></content>
-      <categories>
-        <category>J_积极心理学</category>
-      </categories>
-      <tags>
-        <tag>心理学</tag>
+        <tag>APP</tag>
       </tags>
   </entry>
   <entry>
@@ -762,19 +775,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Blog客户端（APP）</title>
-    <url>/2021/09/16/S_%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/Blog%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
-    <content><![CDATA[<h2 id="下载地址"><code>下载地址</code></h2>
-<p><a href="https://www.aliyundrive.com/s/YXjaTZ1ehcL"><strong>Blog 客户端 (点击下载)</strong></a></p>
-]]></content>
-      <categories>
-        <category>S_实践项目</category>
-      </categories>
-      <tags>
-        <tag>APP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>朴素贝叶斯性别判定系统</title>
     <url>/2021/11/09/S_%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/P_%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="引言"><code>引言</code></h2>
@@ -844,6 +844,42 @@
       </tags>
   </entry>
   <entry>
+    <title>贝叶斯</title>
+    <url>/2021/09/29/S_%E6%95%B0%E5%AD%A6/B_%E8%B4%9D%E5%8F%B6%E6%96%AF/</url>
+    <content><![CDATA[<h2 id="贝叶斯公式"><code>贝叶斯公式</code></h2>
+<p><strong>公式造型：</strong><img src="https://pic.imgdb.cn/item/61543d452ab3f51d914e9281.jpg" alt="贝叶斯公式" style="zoom:50%;"></p>
+<p><strong>P(A|B): ‘|’ 表示given、存在前提的意思，P(A|B)指在B事件发生的条件下A事件发生的概率。</strong></p>
+<p><strong>推理过程：</strong></p>
+<p><strong>(一) A problem about Steve</strong></p>
+<p><img src="https://pic.imgdb.cn/item/61543efc2ab3f51d91506081.jpg" alt=""></p>
+<hr>
+<p><strong>(二)常常忽略的一点！！！</strong></p>
+<p><strong>在考虑概率的大小的同时，不能够感性的去判断，我们需要理性的去分析概率和什么有关系，常常会我们会忽略的一点是Librarian和Farmer的比例。</strong></p>
+<hr>
+<p><strong>(三)将Librarian和Farmer的比例考虑在内</strong></p>
+<p><strong>假设Librarian和Farmer的比例为1：20，假设有10名Librarian和20名Farmer。我们可以将一个正方形分成两部分来分别表示Librarian和Farmer，面积之比为1：20 (其实这就是先验概率)</strong></p>
+<hr>
+<p><strong>(四)考虑这两部分各自独立的概率</strong></p>
+<p><img src="https://pic.imgdb.cn/item/615441ee2ab3f51d915383d9.jpg" alt=""></p>
+<hr>
+<p><strong>(五)完整公式</strong></p>
+<p><img src="https://pic.imgdb.cn/item/615442ab2ab3f51d91544058.jpg" alt=""></p>
+<p><strong>消去总人数</strong></p>
+<p><img src="https://pic.imgdb.cn/item/615443272ab3f51d9154bbe0.jpg" alt=""></p>
+<p><strong>贝叶斯公式！！！</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6154438b2ab3f51d9155162f.jpg" alt=""></p>
+<p><strong>P(E)是更常见的写法，它表示在全体样本(210人)中符合我们要求的人(4+20)的概率。</strong></p>
+]]></content>
+      <categories>
+        <category>S_数学</category>
+      </categories>
+      <tags>
+        <tag>概率论</tag>
+        <tag>Math</tag>
+        <tag>贝叶斯</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学生学籍管理系统</title>
     <url>/2021/09/16/S_%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/X_%E5%AD%A6%E7%94%9F%E5%AD%A6%E7%B1%8D%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<h2 id="引言"><code>引言</code></h2>
@@ -856,6 +892,83 @@
       <tags>
         <tag>链表</tag>
         <tag>文件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>导数的本质</title>
+    <url>/2021/09/16/S_%E6%95%B0%E5%AD%A6/D_%E5%AF%BC%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h1><code>导数</code></h1>
+<h2 id="“导数”名称的来源"><code>“导数”名称的来源</code></h2>
+<p><strong>导数通常来讲指的是变化率，导数的 “<code>导</code>” 字是指导的意思。</strong></p>
+<p><strong>对于一个二维平面上的曲线而言，其曲线的弯曲变化率决定了该曲线的最终形态</strong></p>
+<p><strong>换而言之，变化率（导数）指导了如何去画出这个图像，如何去得到这个图像，这就是<code>导数名称</code>的来源。</strong></p>
+<hr>
+<h2 id="由变化到变化率"><code>由变化到变化率</code></h2>
+<p><strong>我们暂且忘记我们学过的求导公式，既然导数表示的是<code>变化率</code></strong></p>
+<p><strong>那么我们就可以通过观察事物<code>变化特点</code>，得到其变化率，也就是其<code>导数</code>。</strong></p>
+<p><strong>而对于事物的变化，我们需要关注的只有变化<code>前</code>和变化<code>后</code>这两种状态即可</strong></p>
+<p><strong>举个例子：对于 y=2x 而言</strong></p>
+<p><strong>x 是<code>自变量</code>（自己在其取值范围内可任意变化大小）</strong></p>
+<p><strong>y 是<code>因变量</code>（因为 x 的变化而引起相应的变化）</strong></p>
+<p><strong>我们不在关注实际的函数图像形式，上文已经提到，我们需要关注的只有变化前和变化后这两种状态即可</strong></p>
+<p><strong>在这里我们借用一下数轴</strong></p>
+<p><strong>变化前也就 x 本身，想象一下，x 本是一个数轴上的一个点，</strong></p>
+<p><strong>因为 x 本身拥有一个取值范围，所以如果遍历 x 的所有可能性，那么在数轴上 x 会形成线段的状态（可能有很多段）。</strong></p>
+<p><strong>当我们对 x 进行乘以 2 时，这些线段会被拉伸为原来的 2 倍，拉伸之后我们将这条数轴上的线段称为 y。</strong></p>
+<p><strong>仔细想想看上述的 x 经历了什么，其变化过程就在于那个拉伸的过程。</strong></p>
+<p><strong>拉伸的过程中，点的位置发生偏移，x 实质上就是一个点，x 的位置偏移就是 x 的实际变化过程，x=1 的点会偏移 2 位置，-1 的点会偏移到 -2 的位置，而有一个点始不发生偏移，那就是数轴的原点。</strong></p>
+<p><strong>既然 x 的变化我们已知晓，也就是 x 表示的点的偏移，但这是远远不够的，就像知道<code>空间中一个点偏移到另外一个点，我们只知道其变化，而并不知道变化率，变化率无从求出。</code></strong></p>
+<p><strong>还记得上文我们提到的吗？</strong></p>
+<p><strong>我们需要关注的只有变化前和变化后这两种状态即可</strong></p>
+<p><strong>我们回到变化前的状态，也就是数轴上的某些点<code>均匀分布</code>构成的线段</strong></p>
+<p><strong>对于 x=1 这个点而言，我们去描述其状态其实就是下面这段话</strong></p>
+<p><strong>该点位于原点右侧一个单位长度处</strong></p>
+<p><strong>这段话包含了相对位置信息，而并非只是说 x=1 是一个点</strong></p>
+<p><strong>而变化后呢？</strong></p>
+<p><strong>该点位于原点右侧两个单位长度处</strong></p>
+<p><strong>所以求得变化率时其实就是 —— 距离原点的<code>距离之比</code></strong></p>
+<p><strong>也就是 2</strong></p>
+<p><strong>前后状态之比也就是变化率也就是导数，如果在 x-y 坐标系里面表示</strong></p>
+<p><strong>也就是 x 是变化前的状态，y 是变化后的状态</strong></p>
+<p><strong>对其 x 和 y 轴作垂线，其交点组成的线段就是 y=2x 的图像，图像的斜率恰好为变化率。</strong></p>
+<hr>
+<h2 id="对于原点的个人猜测（可不看）"><code>对于原点的个人猜测（可不看）</code></h2>
+<p><strong>原点的特点在于始终会回到原来的位置，即不会发生偏移。</strong></p>
+<p><strong>至于原因在于其值为 0 的特殊性，任何数乘对其作用无效。</strong></p>
+<p><strong>数乘其实就是<code>放缩</code>，这一点在线性代数和上文中显而易见）</strong></p>
+<p><strong>我们在对一个事物去观察时，往往需要一个基准点，就像我们看一个东西时我们往往会找准一个角度去看，再换下一个角度一样。在实分析里面，我们学数学是为了是为了数学分析事物的实用性，所以在数学建模时我们选用的坐标系都会有一个原点（无论是直角坐标系还是极坐标系），可能在名称上略有不同，但终究是为了在数学上确定一个基准点，这个点与数建模对象无关，只和建模结果有关。还是上面那个例子，我们看一样事物时，选取不同的角度也就是不同的基准点，但事物始终时同一个事物，选取的角度不同，看到的结果也会不同，也就是建模结果不同。</strong></p>
+<hr>
+<h2 id="结语"><code>结语</code></h2>
+<p><strong>虽然这一切在学过高中数学的人而言十分简单！</strong></p>
+<p><strong>但对于背后的思维过程的推理仔细去想也是十分美妙的！</strong></p>
+<hr>
+<h1>END</h1>
+]]></content>
+      <categories>
+        <category>S_数学</category>
+      </categories>
+      <tags>
+        <tag>Math</tag>
+        <tag>导数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>页面置换算法模拟</title>
+    <url>/2022/05/12/S_%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE/Y_%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<h1><code>FIFO</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;                      <span class="comment">// 页面序列长度</span></span><br><span class="line"><span class="keyword">int</span> page[N];                <span class="comment">// 页面序列</span></span><br><span class="line"><span class="keyword">int</span> pageState[N];           <span class="comment">// 页面留存时间</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m;                      <span class="comment">// 物理块大小</span></span><br><span class="line"><span class="keyword">int</span> cnt;                    <span class="comment">// 物理块状态计数器</span></span><br><span class="line"><span class="keyword">int</span> blockState[N];          <span class="comment">// 物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> q, z;                   <span class="comment">// 缺页次数和置换次数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;                <span class="comment">// 初始化读入</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span>;               <span class="comment">// 判断物理块占用状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">statistics</span><span class="params">()</span></span>;          <span class="comment">// 统计页面状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span>;        <span class="comment">// 调取页面 x</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transposePage</span><span class="params">(<span class="keyword">int</span> x)</span></span>;  <span class="comment">// 置换页面为 x</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FIFO</span><span class="params">()</span></span>;                <span class="comment">// FIFO算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span>;          <span class="comment">// 输出物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">FIFO</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n置换率：%d/%d\n"</span>, z, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n缺页率：%d/%d\n"</span>, q, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n说明如下：\n第一列为页面走向\n第二列为物理块状态\n第三列 T — 缺页 | F — 不缺页\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>), <span class="built_in">system</span>(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"欢迎使用FIFO模拟算法\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n请输入物理块大小："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列长度："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列："</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;page[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    cnt = <span class="number">0</span>;     <span class="comment">// 初始化物理块占用个数</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">   <span class="keyword">if</span>(cnt == m) <span class="keyword">return</span> <span class="literal">true</span>;    <span class="comment">// 满了</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span>;                <span class="comment">// 没满</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">statistics</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m ; i ++ ) </span><br><span class="line">        <span class="keyword">if</span>(blockState[i] &gt; <span class="number">0</span>)</span><br><span class="line">            pageState[blockState[i]] ++ ;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ )</span><br><span class="line">        <span class="keyword">if</span>(!blockState[i]) </span><br><span class="line">        {</span><br><span class="line">            blockState[i] = x, cnt ++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transposePage</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> maxn = <span class="number">-1</span>, k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m ; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(pageState[blockState[i]] &gt; maxn)</span><br><span class="line">        {</span><br><span class="line">            k = i;</span><br><span class="line">            maxn = pageState[blockState[i]];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    pageState[blockState[k]] = <span class="number">0</span>;</span><br><span class="line">    blockState[k] = x;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FIFO</span><span class="params">()</span>     </span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m ; j ++ )</span><br><span class="line">            <span class="keyword">if</span>(blockState[j] == page[i])</span><br><span class="line">            {</span><br><span class="line">                <span class="built_in">print</span>(i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"F\n"</span>);</span><br><span class="line">                <span class="built_in">statistics</span>();</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            } </span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">judge</span>()) <span class="built_in">getPage</span>(page[i]), <span class="built_in">statistics</span>(), <span class="built_in">print</span>(i), <span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">transposePage</span>(page[i]), <span class="built_in">statistics</span>(), <span class="built_in">print</span>(i),<span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++ , z ++;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PAGE: %d | "</span>, page[t]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m ; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(blockState[i] != <span class="number">0</span>) </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, blockState[i]);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"- "</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"| "</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>LRU</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;                      <span class="comment">// 页面序列长度</span></span><br><span class="line"><span class="keyword">int</span> page[N];                <span class="comment">// 页面序列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m;                      <span class="comment">// 物理块大小</span></span><br><span class="line"><span class="keyword">int</span> cnt;                    <span class="comment">// 物理块状态计数器</span></span><br><span class="line"><span class="keyword">int</span> blockState[N];          <span class="comment">// 物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> q, z;                   <span class="comment">// 缺页次数和置换次数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;                <span class="comment">// 初始化读入</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span>;               <span class="comment">// 判断物理块占用状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span>;        <span class="comment">// 调取页面 x</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LRU</span><span class="params">()</span></span>;                 <span class="comment">// LRU算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span>;          <span class="comment">// 输出物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">LRU</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n置换率：%d/%d\n"</span>, z, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n缺页率：%d/%d\n"</span>, q, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n说明如下：\n第一列为页面走向\n第二列为物理块状态\n第三列 T — 缺页 | F — 不缺页\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>), <span class="built_in">system</span>(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"欢迎使用LRU模拟算法\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n请输入物理块大小："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列长度："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列："</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;page[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    cnt = <span class="number">0</span>;     <span class="comment">// 初始化物理块占用个数</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">   <span class="keyword">if</span>(cnt == m) <span class="keyword">return</span> <span class="literal">true</span>;    <span class="comment">// 满了</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span>;                <span class="comment">// 没满</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ )</span><br><span class="line">        <span class="keyword">if</span>(!blockState[i]) </span><br><span class="line">        {</span><br><span class="line">            blockState[i] = x, cnt ++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transposePage</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> t = page[i - m];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(blockState[i] == t) </span><br><span class="line">        {</span><br><span class="line">            blockState[i] = x;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LRU</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m ; j ++ )</span><br><span class="line">            <span class="keyword">if</span>(blockState[j] == page[i])</span><br><span class="line">            {</span><br><span class="line">                <span class="built_in">print</span>(i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"F\n"</span>);</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            } </span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">judge</span>()) <span class="built_in">getPage</span>(page[i]), <span class="built_in">print</span>(i), <span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">transposePage</span>(i, page[i]), <span class="built_in">print</span>(i), <span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++ , z ++;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PAGE: %d | "</span>, page[t]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m ; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(blockState[i] != <span class="number">0</span>) </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, blockState[i]);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"- "</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"| "</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>NRU</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;                      <span class="comment">// 页面序列长度</span></span><br><span class="line"><span class="keyword">int</span> page[N];                <span class="comment">// 页面序列</span></span><br><span class="line"><span class="keyword">bool</span> pageState[N];          <span class="comment">// 页面状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m;                      <span class="comment">// 物理块大小</span></span><br><span class="line"><span class="keyword">int</span> cnt;                    <span class="comment">// 物理块状态计数器</span></span><br><span class="line"><span class="keyword">int</span> blockState[N];          <span class="comment">// 物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> q, z;                   <span class="comment">// 缺页次数和置换次数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> p = <span class="number">1</span>;                  <span class="comment">// clock指针</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;                <span class="comment">// 初始化读入</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span>;               <span class="comment">// 判断物理块占用状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span>;        <span class="comment">// 调取页面 x</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transposePage</span><span class="params">(<span class="keyword">int</span> x)</span></span>;  <span class="comment">// 置换页面为 x</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NRU</span><span class="params">()</span></span>;                 <span class="comment">// NRU算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span>;          <span class="comment">// 输出物理块状态</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">NRU</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n置换率：%d/%d\n"</span>, z, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n缺页率：%d/%d\n"</span>, q, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n说明如下：\n第一列为页面走向\n第二列为物理块状态\n第三列 T — 缺页 | F — 不缺页\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>), <span class="built_in">system</span>(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"欢迎使用NRU模拟算法\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n请输入物理块大小："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列长度："</span>), <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入页面序列："</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;page[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    cnt = <span class="number">0</span>;     <span class="comment">// 初始化物理块占用个数</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">   <span class="keyword">if</span>(cnt == m) <span class="keyword">return</span> <span class="literal">true</span>;    <span class="comment">// 满了</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">false</span>;                <span class="comment">// 没满</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ )</span><br><span class="line">        <span class="keyword">if</span>(!blockState[i]) </span><br><span class="line">        {</span><br><span class="line">            blockState[i] = x, cnt ++, pageState[x] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transposePage</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> t = m + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(t -- )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(p == m + <span class="number">1</span>) p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(pageState[blockState[p]]) pageState[blockState[p ++ ]] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        {</span><br><span class="line">            blockState[p] = x;</span><br><span class="line">            pageState[blockState[p ++ ]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">NRU</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m ; j ++ )</span><br><span class="line">            <span class="keyword">if</span>(blockState[j] == page[i])</span><br><span class="line">            {</span><br><span class="line">                <span class="keyword">if</span>(!pageState[page[i]]) pageState[page[i]] = <span class="literal">true</span>, p ++ ;</span><br><span class="line">                <span class="built_in">print</span>(i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"F\n"</span>);</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            } </span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">judge</span>()) <span class="built_in">getPage</span>(page[i]), <span class="built_in">print</span>(i), <span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">transposePage</span>(page[i]), <span class="built_in">print</span>(i),<span class="built_in">printf</span>(<span class="string">"T\n"</span>), q ++ , z ++;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PAGE: %d | "</span>, page[t]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m ; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(blockState[i] != <span class="number">0</span>) </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, blockState[i]);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"- "</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"| "</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>S_实践项目</category>
+      </categories>
+      <tags>
+        <tag>FIFO</tag>
+        <tag>LRU</tag>
+        <tag>NRU</tag>
       </tags>
   </entry>
   <entry>
@@ -908,27 +1021,6 @@
       </tags>
   </entry>
   <entry>
-    <title>地宫取宝</title>
-    <url>/2022/03/02/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/D_%E5%9C%B0%E5%AE%AB%E5%8F%96%E5%AE%9D/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/description/1214/">地宫取宝</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><img src="https://pic.imgdb.cn/item/621f555a5baa1a80abf4bc20.jpg" alt=""></p>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">55</span>, MOD = <span class="number">1000000007</span>;</span><br><span class="line"><span class="keyword">int</span> g[N][N], n, m, k;</span><br><span class="line"><span class="keyword">int</span> f[N][N][<span class="number">13</span>][<span class="number">14</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        {</span><br><span class="line">            cin &gt;&gt; g[i][j];</span><br><span class="line">            g[i][j]++;</span><br><span class="line">        }</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>][g[<span class="number">1</span>][<span class="number">1</span>]] = <span class="number">1</span>;</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; j == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt;= k; u++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt;= <span class="number">13</span>; v++)</span><br><span class="line">                {</span><br><span class="line">                    <span class="keyword">int</span>&amp; val = f[i][j][u][v];</span><br><span class="line">                    val = (val + f[i - <span class="number">1</span>][j][u][v]) % MOD;</span><br><span class="line">                    val = (val + f[i][j - <span class="number">1</span>][u][v]) % MOD;</span><br><span class="line">                    <span class="keyword">if</span> (g[i][j] == v &amp;&amp; u &gt; <span class="number">0</span>)</span><br><span class="line">                    {</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; v; c++)</span><br><span class="line">                        {</span><br><span class="line">                            val = (val + f[i - <span class="number">1</span>][j][u - <span class="number">1</span>][c]) % MOD;</span><br><span class="line">                            val = (val + f[i][j - <span class="number">1</span>][u - <span class="number">1</span>][c]) % MOD;</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">        }</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">13</span>; i++) res = (res + f[n][m][k][i]) % MOD;</span><br><span class="line">    cout &lt;&lt; res;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>反思总结</code></h1>
-<p><strong>01.最多加两次就要 MOD</strong></p>
-<p><strong>02.g[i] [j]++使得f数组下标不会为负数</strong></p>
-<hr>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>带分数</title>
     <url>/2022/02/14/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/D_%E5%B8%A6%E5%88%86%E6%95%B0/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -947,8 +1039,29 @@
         <category>L_蓝桥杯</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
         <tag>Math</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>地宫取宝</title>
+    <url>/2022/03/02/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/D_%E5%9C%B0%E5%AE%AB%E5%8F%96%E5%AE%9D/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.acwing.com/problem/content/description/1214/">地宫取宝</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><img src="https://pic.imgdb.cn/item/621f555a5baa1a80abf4bc20.jpg" alt=""></p>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">55</span>, MOD = <span class="number">1000000007</span>;</span><br><span class="line"><span class="keyword">int</span> g[N][N], n, m, k;</span><br><span class="line"><span class="keyword">int</span> f[N][N][<span class="number">13</span>][<span class="number">14</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        {</span><br><span class="line">            cin &gt;&gt; g[i][j];</span><br><span class="line">            g[i][j]++;</span><br><span class="line">        }</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>][g[<span class="number">1</span>][<span class="number">1</span>]] = <span class="number">1</span>;</span><br><span class="line">    f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; j == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt;= k; u++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt;= <span class="number">13</span>; v++)</span><br><span class="line">                {</span><br><span class="line">                    <span class="keyword">int</span>&amp; val = f[i][j][u][v];</span><br><span class="line">                    val = (val + f[i - <span class="number">1</span>][j][u][v]) % MOD;</span><br><span class="line">                    val = (val + f[i][j - <span class="number">1</span>][u][v]) % MOD;</span><br><span class="line">                    <span class="keyword">if</span> (g[i][j] == v &amp;&amp; u &gt; <span class="number">0</span>)</span><br><span class="line">                    {</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; v; c++)</span><br><span class="line">                        {</span><br><span class="line">                            val = (val + f[i - <span class="number">1</span>][j][u - <span class="number">1</span>][c]) % MOD;</span><br><span class="line">                            val = (val + f[i][j - <span class="number">1</span>][u - <span class="number">1</span>][c]) % MOD;</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">        }</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">13</span>; i++) res = (res + f[n][m][k][i]) % MOD;</span><br><span class="line">    cout &lt;&lt; res;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>反思总结</code></h1>
+<p><strong>01.最多加两次就要 MOD</strong></p>
+<p><strong>02.g[i] [j]++使得f数组下标不会为负数</strong></p>
+<hr>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
@@ -1138,24 +1251,6 @@
       </tags>
   </entry>
   <entry>
-    <title>回文日期</title>
-    <url>/2022/03/06/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/H_%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/description/468/">回文日期</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><strong>01.不去枚举日期，而去枚举回文数，枚举一半即可</strong></p>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> res;</span><br><span class="line"><span class="keyword">int</span> month[<span class="number">13</span>]={<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> date)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> y = date / <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">int</span> m = date % <span class="number">10000</span> / <span class="number">100</span>; </span><br><span class="line">	<span class="keyword">int</span> d = date % <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">if</span>(m == <span class="number">0</span> || m &gt;= <span class="number">13</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(m != <span class="number">2</span> &amp;&amp; d &gt; month[m]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(m == <span class="number">2</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">bool</span> leap = y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> || y % <span class="number">400</span> == <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(d &gt; <span class="number">28</span> + leap) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> d1, d2;</span><br><span class="line">	cin &gt;&gt; d1 &gt;&gt; d2;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> t1=i,t2=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++) t1=t1*<span class="number">10</span>+t2%<span class="number">10</span>,t2/=<span class="number">10</span>;<span class="comment">//左移加数 </span></span><br><span class="line">		<span class="keyword">if</span>(t1&gt;=d1&amp;&amp;t1&lt;=d2&amp;&amp;<span class="built_in">check</span>(t1)) res++;</span><br><span class="line">	}</span><br><span class="line">	cout&lt;&lt;res;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>模拟</tag>
-        <tag>枚举</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>红与黑</title>
     <url>/2022/03/31/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/H_%E7%BA%A2%E4%B8%8E%E9%BB%91/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1174,6 +1269,24 @@
       </categories>
       <tags>
         <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回文日期</title>
+    <url>/2022/03/06/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/H_%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.acwing.com/problem/content/description/468/">回文日期</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><strong>01.不去枚举日期，而去枚举回文数，枚举一半即可</strong></p>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> res;</span><br><span class="line"><span class="keyword">int</span> month[<span class="number">13</span>]={<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> date)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> y = date / <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">int</span> m = date % <span class="number">10000</span> / <span class="number">100</span>; </span><br><span class="line">	<span class="keyword">int</span> d = date % <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">if</span>(m == <span class="number">0</span> || m &gt;= <span class="number">13</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(m != <span class="number">2</span> &amp;&amp; d &gt; month[m]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(m == <span class="number">2</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">bool</span> leap = y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> || y % <span class="number">400</span> == <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(d &gt; <span class="number">28</span> + leap) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> d1, d2;</span><br><span class="line">	cin &gt;&gt; d1 &gt;&gt; d2;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> t1=i,t2=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++) t1=t1*<span class="number">10</span>+t2%<span class="number">10</span>,t2/=<span class="number">10</span>;<span class="comment">//左移加数 </span></span><br><span class="line">		<span class="keyword">if</span>(t1&gt;=d1&amp;&amp;t1&lt;=d2&amp;&amp;<span class="built_in">check</span>(t1)) res++;</span><br><span class="line">	}</span><br><span class="line">	cout&lt;&lt;res;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
+        <tag>枚举</tag>
       </tags>
   </entry>
   <entry>
@@ -1221,27 +1334,6 @@
       </tags>
   </entry>
   <entry>
-    <title>机器人跳跃问题</title>
-    <url>/2022/02/23/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/J_%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%B3%E8%B7%83%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/732/">机器人跳跃问题</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><strong>01.想这道题的思路——二分、dfs、贪心，dp 。。。</strong></p>
-<p><strong>02.题目关键词——至少以多少能量值开始游戏——区间求左边界问题——二分</strong></p>
-<p><strong>03.具有二段型，最小值左边不行，本身和其右边可以</strong></p>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        e=<span class="number">2</span>*e-a[i];</span><br><span class="line">        <span class="keyword">if</span>(e&gt;<span class="number">1e5</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(e&lt;<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">int</span> l=<span class="number">0</span>,r=<span class="number">1e5</span>+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l+<span class="number">1</span>!=r)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> mid = l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(mid))</span><br><span class="line">            r=mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l=mid;</span><br><span class="line">    }</span><br><span class="line">    cout&lt;&lt;r;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>反思总结</code></h1>
-<p><strong>01.两种情况应该列式子化简写出来，不然发现不了规律</strong></p>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>二分</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>简单斐波那契</title>
     <url>/2022/02/11/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/J_%E7%AE%80%E5%8D%95%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1265,26 +1357,24 @@
       </tags>
   </entry>
   <entry>
-    <title>K倍区间</title>
-    <url>/2022/02/28/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/K%E5%80%8D%E5%8C%BA%E9%97%B4/</url>
+    <title>机器人跳跃问题</title>
+    <url>/2022/02/23/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/J_%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%B3%E8%B7%83%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/1232/">K倍区间</a></strong></p>
+<p><strong><a href="https://www.acwing.com/problem/content/732/">机器人跳跃问题</a></strong></p>
 <h1><code>题目解析</code></h1>
-<p><strong>01.一维度前缀和</strong></p>
-<p><strong>02.双重循环会导致O（n）复杂度，导致超时</strong></p>
-<p><strong>03.我们对公式变形：(s[j]-s[i-1])%k==0 —— (s[i-1]%k==s[j]%k)</strong></p>
-<p><strong>04.用一个数组来记录不同余数出现的次数，用res巧妙地求和，例如某个余数次数出现四次，区间数为 0+1+2+3，所以我们在记录前求和即可</strong></p>
+<p><strong>01.想这道题的思路——二分、dfs、贪心，dp 。。。</strong></p>
+<p><strong>02.题目关键词——至少以多少能量值开始游戏——区间求左边界问题——二分</strong></p>
+<p><strong>03.具有二段型，最小值左边不行，本身和其右边可以</strong></p>
 <h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line">ll s[N],cnt[N],n,k,res;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;s[i]);</span><br><span class="line">        s[i]+=s[i<span class="number">-1</span>];</span><br><span class="line">    }</span><br><span class="line">    cnt[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        res+=cnt[s[i]%k];</span><br><span class="line">        cnt[s[i]%k]++;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        e=<span class="number">2</span>*e-a[i];</span><br><span class="line">        <span class="keyword">if</span>(e&gt;<span class="number">1e5</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(e&lt;<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">int</span> l=<span class="number">0</span>,r=<span class="number">1e5</span>+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l+<span class="number">1</span>!=r)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> mid = l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(mid))</span><br><span class="line">            r=mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l=mid;</span><br><span class="line">    }</span><br><span class="line">    cout&lt;&lt;r;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h1><code>反思总结</code></h1>
-<p><strong>01.一维度的前缀和可以在输入的时候直接前缀和数组来求</strong></p>
-<p><strong>02.typedef long long ll 和 宏命令不一样需要加分号</strong></p>
+<p><strong>01.两种情况应该列式子化简写出来，不然发现不了规律</strong></p>
 ]]></content>
       <categories>
         <category>L_蓝桥杯</category>
       </categories>
       <tags>
-        <tag>前缀和</tag>
+        <tag>二分</tag>
       </tags>
   </entry>
   <entry>
@@ -1307,6 +1397,29 @@
       </categories>
       <tags>
         <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K倍区间</title>
+    <url>/2022/02/28/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/K%E5%80%8D%E5%8C%BA%E9%97%B4/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.acwing.com/problem/content/1232/">K倍区间</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><strong>01.一维度前缀和</strong></p>
+<p><strong>02.双重循环会导致O（n）复杂度，导致超时</strong></p>
+<p><strong>03.我们对公式变形：(s[j]-s[i-1])%k==0 —— (s[i-1]%k==s[j]%k)</strong></p>
+<p><strong>04.用一个数组来记录不同余数出现的次数，用res巧妙地求和，例如某个余数次数出现四次，区间数为 0+1+2+3，所以我们在记录前求和即可</strong></p>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line">ll s[N],cnt[N],n,k,res;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;s[i]);</span><br><span class="line">        s[i]+=s[i<span class="number">-1</span>];</span><br><span class="line">    }</span><br><span class="line">    cnt[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        res+=cnt[s[i]%k];</span><br><span class="line">        cnt[s[i]%k]++;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>反思总结</code></h1>
+<p><strong>01.一维度的前缀和可以在输入的时候直接前缀和数组来求</strong></p>
+<p><strong>02.typedef long long ll 和 宏命令不一样需要加分号</strong></p>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -1418,6 +1531,23 @@
       </tags>
   </entry>
   <entry>
+    <title>删除字符</title>
+    <url>/2021/12/06/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.lanqiao.cn/problems/544/learning/">删除字符</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><strong>贪心策略：扫描整个字符串，只要当前位置的字符大于下一个位置的字符，就把当前位置的字符删去。</strong></p>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	string s;</span><br><span class="line">	cin &gt;&gt; s &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() - <span class="number">1</span>; i ++ )</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (s[i] &gt; s[i + <span class="number">1</span>])</span><br><span class="line">			{</span><br><span class="line">				s.<span class="built_in">erase</span>(i, <span class="number">1</span>);    <span class="comment">// 从第i位置往后删除1个字符</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	cout &lt;&lt; s;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>四平方和</title>
     <url>/2022/02/25/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E5%9B%9B%E5%B9%B3%E6%96%B9%E5%92%8C/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1439,23 +1569,6 @@
       <tags>
         <tag>枚举</tag>
         <tag>哈希</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>删除字符</title>
-    <url>/2021/12/06/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.lanqiao.cn/problems/544/learning/">删除字符</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><strong>贪心策略：扫描整个字符串，只要当前位置的字符大于下一个位置的字符，就把当前位置的字符删去。</strong></p>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	string s;</span><br><span class="line">	cin &gt;&gt; s &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>() - <span class="number">1</span>; i ++ )</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (s[i] &gt; s[i + <span class="number">1</span>])</span><br><span class="line">			{</span><br><span class="line">				s.<span class="built_in">erase</span>(i, <span class="number">1</span>);    <span class="comment">// 从第i位置往后删除1个字符</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	cout &lt;&lt; s;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -1497,25 +1610,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数的三次方根</title>
-    <url>/2022/02/18/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E6%95%B0%E7%9A%84%E4%B8%89%E6%AC%A1%E6%96%B9%E6%A0%B9/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/description/792/">数的三次方根</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><strong>01.用二分去逼近</strong></p>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">double</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">double</span> l = <span class="number">-10000</span>, r = <span class="number">10000</span>;   <span class="comment">//n的3次方根一点在n的范围内</span></span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; <span class="number">1e-8</span>)            <span class="comment">//多精确2位</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (mid * mid * mid &gt; n)</span><br><span class="line">            r = mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l = mid;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lf"</span>, l);               <span class="comment">//默认保留小数点后6位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>反思总结</code></h1>
-<p><strong>无</strong></p>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>二分</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数的范围</title>
     <url>/2022/02/17/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E6%95%B0%E7%9A%84%E8%8C%83%E5%9B%B4/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1528,6 +1622,25 @@
 <p><strong>01.确定左右边界点</strong></p>
 <p><strong>02.确定红蓝范围</strong></p>
 <p><strong>03.小于L等，大于R等</strong></p>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>二分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数的三次方根</title>
+    <url>/2022/02/18/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/S_%E6%95%B0%E7%9A%84%E4%B8%89%E6%AC%A1%E6%96%B9%E6%A0%B9/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.acwing.com/problem/content/description/792/">数的三次方根</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><strong>01.用二分去逼近</strong></p>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">double</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">double</span> l = <span class="number">-10000</span>, r = <span class="number">10000</span>;   <span class="comment">//n的3次方根一点在n的范围内</span></span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; <span class="number">1e-8</span>)            <span class="comment">//多精确2位</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (mid * mid * mid &gt; n)</span><br><span class="line">            r = mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l = mid;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lf"</span>, l);               <span class="comment">//默认保留小数点后6位</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>反思总结</code></h1>
+<p><strong>无</strong></p>
 ]]></content>
       <categories>
         <category>L_蓝桥杯</category>
@@ -1603,30 +1716,6 @@
       </tags>
   </entry>
   <entry>
-    <title>摘花生</title>
-    <url>/2022/03/01/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/Z_%E6%91%98%E8%8A%B1%E7%94%9F/</url>
-    <content><![CDATA[<h1><code>题目来源</code></h1>
-<p><strong><a href="https://www.acwing.com/problem/content/1017/">摘花生</a></strong></p>
-<h1><code>题目解析</code></h1>
-<p><strong>01.集合：从（1，1）到（i，j）点的所有路线的集合</strong></p>
-<p><strong>02.集合种所有路线的花生总数的最大值</strong></p>
-<p><strong>03.计算：最后到达（i，j）时，f [i] [j] = max(f [i - 1] [j], f [i] [j - 1]) + g [i] [j]</strong></p>
-<p><strong>04.输出f [r] [c]</strong></p>
-<hr>
-<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">110</span>;</span><br><span class="line"><span class="keyword">int</span> f[N][N], g[N][N], r, c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	cin &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">		<span class="built_in">memset</span>(g, <span class="number">0</span>, <span class="keyword">sizeof</span> g);</span><br><span class="line">		cin &gt;&gt; r &gt;&gt; c;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">				cin &gt;&gt; g[i][j];</span><br><span class="line">		f[<span class="number">1</span>][<span class="number">1</span>] = g[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">				f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i][j - <span class="number">1</span>]) + g[i][j];</span><br><span class="line">		cout &lt;&lt; f[r][c] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>反思总结</code></h1>
-<p><strong>4</strong></p>
-]]></content>
-      <categories>
-        <category>L_蓝桥杯</category>
-      </categories>
-      <tags>
-        <tag>DP</tag>
-        <tag>线性DP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>子矩阵的和</title>
     <url>/2022/02/18/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/Z_%E5%AD%90%E7%9F%A9%E9%98%B5%E7%9A%84%E5%92%8C/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1673,6 +1762,30 @@
       </tags>
   </entry>
   <entry>
+    <title>摘花生</title>
+    <url>/2022/03/01/L_%E8%93%9D%E6%A1%A5%E6%9D%AF/Z_%E6%91%98%E8%8A%B1%E7%94%9F/</url>
+    <content><![CDATA[<h1><code>题目来源</code></h1>
+<p><strong><a href="https://www.acwing.com/problem/content/1017/">摘花生</a></strong></p>
+<h1><code>题目解析</code></h1>
+<p><strong>01.集合：从（1，1）到（i，j）点的所有路线的集合</strong></p>
+<p><strong>02.集合种所有路线的花生总数的最大值</strong></p>
+<p><strong>03.计算：最后到达（i，j）时，f [i] [j] = max(f [i - 1] [j], f [i] [j - 1]) + g [i] [j]</strong></p>
+<p><strong>04.输出f [r] [c]</strong></p>
+<hr>
+<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">110</span>;</span><br><span class="line"><span class="keyword">int</span> f[N][N], g[N][N], r, c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	cin &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">		<span class="built_in">memset</span>(g, <span class="number">0</span>, <span class="keyword">sizeof</span> g);</span><br><span class="line">		cin &gt;&gt; r &gt;&gt; c;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">				cin &gt;&gt; g[i][j];</span><br><span class="line">		f[<span class="number">1</span>][<span class="number">1</span>] = g[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)</span><br><span class="line">				f[i][j] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][j], f[i][j - <span class="number">1</span>]) + g[i][j];</span><br><span class="line">		cout &lt;&lt; f[r][c] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>反思总结</code></h1>
+<p><strong>4</strong></p>
+]]></content>
+      <categories>
+        <category>L_蓝桥杯</category>
+      </categories>
+      <tags>
+        <tag>DP</tag>
+        <tag>线性DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>连续因子</title>
     <url>/2022/03/30/T_%E5%A4%A9%E6%A2%AF%E8%B5%9B/L_%E8%BF%9E%E7%BB%AD%E5%9B%A0%E5%AD%90/</url>
     <content><![CDATA[<h1><code>题目来源</code></h1>
@@ -1689,64 +1802,6 @@
       </categories>
       <tags>
         <tag>Math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>导数的本质</title>
-    <url>/2021/09/16/S_%E6%95%B0%E5%AD%A6/D_%E5%AF%BC%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h1><code>导数</code></h1>
-<h2 id="“导数”名称的来源"><code>“导数”名称的来源</code></h2>
-<p><strong>导数通常来讲指的是变化率，导数的 “<code>导</code>” 字是指导的意思。</strong></p>
-<p><strong>对于一个二维平面上的曲线而言，其曲线的弯曲变化率决定了该曲线的最终形态</strong></p>
-<p><strong>换而言之，变化率（导数）指导了如何去画出这个图像，如何去得到这个图像，这就是<code>导数名称</code>的来源。</strong></p>
-<hr>
-<h2 id="由变化到变化率"><code>由变化到变化率</code></h2>
-<p><strong>我们暂且忘记我们学过的求导公式，既然导数表示的是<code>变化率</code></strong></p>
-<p><strong>那么我们就可以通过观察事物<code>变化特点</code>，得到其变化率，也就是其<code>导数</code>。</strong></p>
-<p><strong>而对于事物的变化，我们需要关注的只有变化<code>前</code>和变化<code>后</code>这两种状态即可</strong></p>
-<p><strong>举个例子：对于 y=2x 而言</strong></p>
-<p><strong>x 是<code>自变量</code>（自己在其取值范围内可任意变化大小）</strong></p>
-<p><strong>y 是<code>因变量</code>（因为 x 的变化而引起相应的变化）</strong></p>
-<p><strong>我们不在关注实际的函数图像形式，上文已经提到，我们需要关注的只有变化前和变化后这两种状态即可</strong></p>
-<p><strong>在这里我们借用一下数轴</strong></p>
-<p><strong>变化前也就 x 本身，想象一下，x 本是一个数轴上的一个点，</strong></p>
-<p><strong>因为 x 本身拥有一个取值范围，所以如果遍历 x 的所有可能性，那么在数轴上 x 会形成线段的状态（可能有很多段）。</strong></p>
-<p><strong>当我们对 x 进行乘以 2 时，这些线段会被拉伸为原来的 2 倍，拉伸之后我们将这条数轴上的线段称为 y。</strong></p>
-<p><strong>仔细想想看上述的 x 经历了什么，其变化过程就在于那个拉伸的过程。</strong></p>
-<p><strong>拉伸的过程中，点的位置发生偏移，x 实质上就是一个点，x 的位置偏移就是 x 的实际变化过程，x=1 的点会偏移 2 位置，-1 的点会偏移到 -2 的位置，而有一个点始不发生偏移，那就是数轴的原点。</strong></p>
-<p><strong>既然 x 的变化我们已知晓，也就是 x 表示的点的偏移，但这是远远不够的，就像知道<code>空间中一个点偏移到另外一个点，我们只知道其变化，而并不知道变化率，变化率无从求出。</code></strong></p>
-<p><strong>还记得上文我们提到的吗？</strong></p>
-<p><strong>我们需要关注的只有变化前和变化后这两种状态即可</strong></p>
-<p><strong>我们回到变化前的状态，也就是数轴上的某些点<code>均匀分布</code>构成的线段</strong></p>
-<p><strong>对于 x=1 这个点而言，我们去描述其状态其实就是下面这段话</strong></p>
-<p><strong>该点位于原点右侧一个单位长度处</strong></p>
-<p><strong>这段话包含了相对位置信息，而并非只是说 x=1 是一个点</strong></p>
-<p><strong>而变化后呢？</strong></p>
-<p><strong>该点位于原点右侧两个单位长度处</strong></p>
-<p><strong>所以求得变化率时其实就是 —— 距离原点的<code>距离之比</code></strong></p>
-<p><strong>也就是 2</strong></p>
-<p><strong>前后状态之比也就是变化率也就是导数，如果在 x-y 坐标系里面表示</strong></p>
-<p><strong>也就是 x 是变化前的状态，y 是变化后的状态</strong></p>
-<p><strong>对其 x 和 y 轴作垂线，其交点组成的线段就是 y=2x 的图像，图像的斜率恰好为变化率。</strong></p>
-<hr>
-<h2 id="对于原点的个人猜测（可不看）"><code>对于原点的个人猜测（可不看）</code></h2>
-<p><strong>原点的特点在于始终会回到原来的位置，即不会发生偏移。</strong></p>
-<p><strong>至于原因在于其值为 0 的特殊性，任何数乘对其作用无效。</strong></p>
-<p><strong>数乘其实就是<code>放缩</code>，这一点在线性代数和上文中显而易见）</strong></p>
-<p><strong>我们在对一个事物去观察时，往往需要一个基准点，就像我们看一个东西时我们往往会找准一个角度去看，再换下一个角度一样。在实分析里面，我们学数学是为了是为了数学分析事物的实用性，所以在数学建模时我们选用的坐标系都会有一个原点（无论是直角坐标系还是极坐标系），可能在名称上略有不同，但终究是为了在数学上确定一个基准点，这个点与数建模对象无关，只和建模结果有关。还是上面那个例子，我们看一样事物时，选取不同的角度也就是不同的基准点，但事物始终时同一个事物，选取的角度不同，看到的结果也会不同，也就是建模结果不同。</strong></p>
-<hr>
-<h2 id="结语"><code>结语</code></h2>
-<p><strong>虽然这一切在学过高中数学的人而言十分简单！</strong></p>
-<p><strong>但对于背后的思维过程的推理仔细去想也是十分美妙的！</strong></p>
-<hr>
-<h1>END</h1>
-]]></content>
-      <categories>
-        <category>S_数学</category>
-      </categories>
-      <tags>
-        <tag>Math</tag>
-        <tag>导数</tag>
       </tags>
   </entry>
   <entry>
@@ -1770,42 +1825,6 @@
       </categories>
       <tags>
         <tag>句</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>贝叶斯</title>
-    <url>/2021/09/29/S_%E6%95%B0%E5%AD%A6/B_%E8%B4%9D%E5%8F%B6%E6%96%AF/</url>
-    <content><![CDATA[<h2 id="贝叶斯公式"><code>贝叶斯公式</code></h2>
-<p><strong>公式造型：</strong><img src="https://pic.imgdb.cn/item/61543d452ab3f51d914e9281.jpg" alt="贝叶斯公式" style="zoom:50%;"></p>
-<p><strong>P(A|B): ‘|’ 表示given、存在前提的意思，P(A|B)指在B事件发生的条件下A事件发生的概率。</strong></p>
-<p><strong>推理过程：</strong></p>
-<p><strong>(一) A problem about Steve</strong></p>
-<p><img src="https://pic.imgdb.cn/item/61543efc2ab3f51d91506081.jpg" alt=""></p>
-<hr>
-<p><strong>(二)常常忽略的一点！！！</strong></p>
-<p><strong>在考虑概率的大小的同时，不能够感性的去判断，我们需要理性的去分析概率和什么有关系，常常会我们会忽略的一点是Librarian和Farmer的比例。</strong></p>
-<hr>
-<p><strong>(三)将Librarian和Farmer的比例考虑在内</strong></p>
-<p><strong>假设Librarian和Farmer的比例为1：20，假设有10名Librarian和20名Farmer。我们可以将一个正方形分成两部分来分别表示Librarian和Farmer，面积之比为1：20 (其实这就是先验概率)</strong></p>
-<hr>
-<p><strong>(四)考虑这两部分各自独立的概率</strong></p>
-<p><img src="https://pic.imgdb.cn/item/615441ee2ab3f51d915383d9.jpg" alt=""></p>
-<hr>
-<p><strong>(五)完整公式</strong></p>
-<p><img src="https://pic.imgdb.cn/item/615442ab2ab3f51d91544058.jpg" alt=""></p>
-<p><strong>消去总人数</strong></p>
-<p><img src="https://pic.imgdb.cn/item/615443272ab3f51d9154bbe0.jpg" alt=""></p>
-<p><strong>贝叶斯公式！！！</strong></p>
-<p><img src="https://pic.imgdb.cn/item/6154438b2ab3f51d9155162f.jpg" alt=""></p>
-<p><strong>P(E)是更常见的写法，它表示在全体样本(210人)中符合我们要求的人(4+20)的概率。</strong></p>
-]]></content>
-      <categories>
-        <category>S_数学</category>
-      </categories>
-      <tags>
-        <tag>概率论</tag>
-        <tag>Math</tag>
-        <tag>贝叶斯</tag>
       </tags>
   </entry>
   <entry>
@@ -2631,26 +2650,6 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
       </tags>
   </entry>
   <entry>
-    <title>Dijkstra</title>
-    <url>/2021/12/09/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/Dijkstra%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p><strong>Dijkstra算法——单源最短路径算法</strong></p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> map[MAX][MAX];</span><br><span class="line"><span class="keyword">int</span> book[MAX], dis[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">//初始化</span></span><br><span class="line">	book[s] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		dis[i] = map[s][i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="comment">//找最小并标记</span></span><br><span class="line">		<span class="keyword">int</span> temp = INF, t = s;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; dis[j] &lt; temp)</span><br><span class="line">			{</span><br><span class="line">				t = j;</span><br><span class="line">				temp = dis[j];</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (t == s)</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		book[t] = <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//t的邻接点借东风</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; map[t][j] != INF)</span><br><span class="line">				<span class="keyword">if</span> (dis[j] &gt; dis[t] + map[t][j])</span><br><span class="line">					dis[j] = dis[t] + map[t][j];</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">memset</span>(map, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(map));</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">while</span> (m--)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> a, b, c;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		map[a][b] = <span class="built_in">min</span>(map[a][b], c);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">int</span> s;</span><br><span class="line">	cin &gt;&gt; s;</span><br><span class="line">	map[s][s] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">dijkstra</span>(s);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cout &lt;&lt; dis[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试样例</span></span><br><span class="line"><span class="comment">//5 8</span></span><br><span class="line"><span class="comment">//1 2 2</span></span><br><span class="line"><span class="comment">//1 3 5</span></span><br><span class="line"><span class="comment">//2 3 2</span></span><br><span class="line"><span class="comment">//2 4 6</span></span><br><span class="line"><span class="comment">//3 4 7</span></span><br><span class="line"><span class="comment">//4 3 2</span></span><br><span class="line"><span class="comment">//3 5 1</span></span><br><span class="line"><span class="comment">//4 5 4</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="comment">//0 2 4 8 5</span></span><br></pre></td></tr></tbody></table></figure>
-<p><strong>Summary：</strong></p>
-<p><strong>01.初始化</strong></p>
-<p><strong>02.找最小</strong></p>
-<p><strong>03.借东风</strong></p>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>图论</tag>
-        <tag>算法</tag>
-        <tag>SP</tag>
-        <tag>Dijkstra</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>二叉树重建</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/E_%E4%BA%8C%E5%8F%89%E6%A0%91%E9%87%8D%E5%BB%BA/</url>
     <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
@@ -2689,6 +2688,26 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
       </tags>
   </entry>
   <entry>
+    <title>Dijkstra</title>
+    <url>/2021/12/09/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/Dijkstra%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p><strong>Dijkstra算法——单源最短路径算法</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> map[MAX][MAX];</span><br><span class="line"><span class="keyword">int</span> book[MAX], dis[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">//初始化</span></span><br><span class="line">	book[s] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		dis[i] = map[s][i];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="comment">//找最小并标记</span></span><br><span class="line">		<span class="keyword">int</span> temp = INF, t = s;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; dis[j] &lt; temp)</span><br><span class="line">			{</span><br><span class="line">				t = j;</span><br><span class="line">				temp = dis[j];</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (t == s)</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		book[t] = <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//t的邻接点借东风</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; map[t][j] != INF)</span><br><span class="line">				<span class="keyword">if</span> (dis[j] &gt; dis[t] + map[t][j])</span><br><span class="line">					dis[j] = dis[t] + map[t][j];</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">memset</span>(map, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(map));</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">while</span> (m--)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> a, b, c;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		map[a][b] = <span class="built_in">min</span>(map[a][b], c);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">int</span> s;</span><br><span class="line">	cin &gt;&gt; s;</span><br><span class="line">	map[s][s] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">dijkstra</span>(s);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cout &lt;&lt; dis[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试样例</span></span><br><span class="line"><span class="comment">//5 8</span></span><br><span class="line"><span class="comment">//1 2 2</span></span><br><span class="line"><span class="comment">//1 3 5</span></span><br><span class="line"><span class="comment">//2 3 2</span></span><br><span class="line"><span class="comment">//2 4 6</span></span><br><span class="line"><span class="comment">//3 4 7</span></span><br><span class="line"><span class="comment">//4 3 2</span></span><br><span class="line"><span class="comment">//3 5 1</span></span><br><span class="line"><span class="comment">//4 5 4</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="comment">//0 2 4 8 5</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Summary：</strong></p>
+<p><strong>01.初始化</strong></p>
+<p><strong>02.找最小</strong></p>
+<p><strong>03.借东风</strong></p>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>算法</tag>
+        <tag>SP</tag>
+        <tag>Dijkstra</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Entropy</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/Entropy/</url>
     <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
@@ -2723,23 +2742,6 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
         <tag>图论</tag>
         <tag>算法</tag>
         <tag>HT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>归并排序</title>
-    <url>/2021/10/02/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/G_%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h2 id="核心思想"><code>核心思想</code></h2>
-<p><strong>不断二分，直到分为一个最小单元，然后借助辅助数组进行并的操作。</strong></p>
-<h2 id="完整代码"><code>完整代码</code></h2>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> temp[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt;= right; i++)</span><br><span class="line">		temp[i] = a[i];</span><br><span class="line">	<span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>, k = left;</span><br><span class="line">	<span class="keyword">while</span> (k &lt;= right)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (i &lt;= mid &amp;&amp; j &lt;= right)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (temp[i] &lt;= temp[j])</span><br><span class="line">				a[k++] = temp[i++];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				a[k++] = temp[j++];</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (j == right + <span class="number">1</span>)</span><br><span class="line">				a[k++] = temp[i++];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				a[k++] = temp[j++];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">mergeSort</span>(a,left, mid);</span><br><span class="line">	<span class="built_in">mergeSort</span>(a, mid+<span class="number">1</span>,right);</span><br><span class="line">	<span class="built_in">merge</span>(a, left, mid, right);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">100</span>], n;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	<span class="built_in">mergeSort</span>(a, <span class="number">1</span>, n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cout &lt;&lt; a[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>排序</tag>
-        <tag>归并</tag>
       </tags>
   </entry>
   <entry>
@@ -2787,6 +2789,23 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
         <tag>DFS</tag>
         <tag>算法</tag>
         <tag>搜索🔍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>归并排序</title>
+    <url>/2021/10/02/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/G_%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="核心思想"><code>核心思想</code></h2>
+<p><strong>不断二分，直到分为一个最小单元，然后借助辅助数组进行并的操作。</strong></p>
+<h2 id="完整代码"><code>完整代码</code></h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> temp[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt;= right; i++)</span><br><span class="line">		temp[i] = a[i];</span><br><span class="line">	<span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>, k = left;</span><br><span class="line">	<span class="keyword">while</span> (k &lt;= right)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span> (i &lt;= mid &amp;&amp; j &lt;= right)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (temp[i] &lt;= temp[j])</span><br><span class="line">				a[k++] = temp[i++];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				a[k++] = temp[j++];</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (j == right + <span class="number">1</span>)</span><br><span class="line">				a[k++] = temp[i++];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				a[k++] = temp[j++];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">mergeSort</span>(a,left, mid);</span><br><span class="line">	<span class="built_in">mergeSort</span>(a, mid+<span class="number">1</span>,right);</span><br><span class="line">	<span class="built_in">merge</span>(a, left, mid, right);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">100</span>], n;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	<span class="built_in">mergeSort</span>(a, <span class="number">1</span>, n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		cout &lt;&lt; a[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>排序</tag>
+        <tag>归并</tag>
       </tags>
   </entry>
   <entry>
@@ -2898,23 +2917,6 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
       </tags>
   </entry>
   <entry>
-    <title>快速排序</title>
-    <url>/2021/09/29/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/K_%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h2 id="基本思想"><code>基本思想</code></h2>
-<p><strong>基准数的比较产生交换，基准数就位，递归</strong></p>
-<h2 id="完整代码"><code>完整代码</code></h2>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mySort</span><span class="params">(<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> temp = a[left];</span><br><span class="line">	<span class="keyword">int</span> i = left;</span><br><span class="line">	<span class="keyword">int</span> j = right;</span><br><span class="line">	<span class="keyword">while</span> (i != j)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">while</span> (j &gt; i)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (a[j] &lt;= temp)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			j--;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">while</span> (i &lt; j)</span><br><span class="line">		{</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (a[i] &gt; temp)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			i++;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">int</span> t = a[i];</span><br><span class="line">			a[i] = a[j];</span><br><span class="line">			a[j] = t;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	a[left] = a[i];</span><br><span class="line">	a[i] = temp;</span><br><span class="line">	<span class="built_in">mySort</span>(left, i<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">mySort</span>(i + <span class="number">1</span>, right);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	<span class="built_in">mySort</span>(<span class="number">1</span>,<span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>排序</tag>
-        <tag>快速</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jungle Roads</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/Jungle%20Roads/</url>
     <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
@@ -2937,25 +2939,20 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
       </tags>
   </entry>
   <entry>
-    <title>01 迷宫</title>
-    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/L_%E9%9B%B6%E4%B8%80%E8%BF%B7%E5%AE%AB/</url>
-    <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
-<p><strong><a href="https://www.luogu.com.cn/problem/P1141">01 迷宫</a></strong></p>
+    <title>快速排序</title>
+    <url>/2021/09/29/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/K_%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="基本思想"><code>基本思想</code></h2>
+<p><strong>基准数的比较产生交换，基准数就位，递归</strong></p>
 <h2 id="完整代码"><code>完整代码</code></h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1005</span></span><br><span class="line"><span class="keyword">int</span> m, n, ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[MAX][MAX];</span><br><span class="line"><span class="keyword">int</span> book[MAX][MAX];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	book[x][y] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> next[<span class="number">4</span>][<span class="number">2</span>] = { {<span class="number">1</span>,<span class="number">0</span>},{<span class="number">0</span>,<span class="number">1</span>},{<span class="number">-1</span>,<span class="number">0</span>},{<span class="number">0</span>,<span class="number">-1</span>} };</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> dx = x + next[k][<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">int</span> dy = y + next[k][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (((<span class="built_in">map</span>[dx][dy] == <span class="number">0</span> &amp;&amp; <span class="built_in">map</span>[x][y] == <span class="number">1</span>) || (<span class="built_in">map</span>[dx][dy] == <span class="number">1</span> &amp;&amp; <span class="built_in">map</span>[x][y] == <span class="number">0</span>)) &amp;&amp; dx &gt;= <span class="number">1</span> &amp;&amp; dx &lt;= n &amp;&amp; dy &gt;= <span class="number">1</span> &amp;&amp; dy &lt;= n &amp;&amp; book[dx][dy] == <span class="number">0</span>)</span><br><span class="line">		{</span><br><span class="line">			ans++;</span><br><span class="line">			dfs(dx, dy);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			book[i][j] = <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">char</span> ch[MAX];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%1d"</span>, &amp;<span class="built_in">map</span>[i][j]);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">		clear();</span><br><span class="line">		dfs(x, y);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>以上代码虽然是正确的，但是因为<code>效率过低</code>，在洛谷平台的样例测试中会出现<code>时间超限</code>的情况如下图：</strong><br>
-<img src="https://pic.imgdb.cn/item/60feb0415132923bf8635a91.jpg" alt="测试结果"></p>
-<h2 id="剪枝优化">剪枝优化</h2>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//未更</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="END">END</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mySort</span><span class="params">(<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">if</span> (left &gt;= right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> temp = a[left];</span><br><span class="line">	<span class="keyword">int</span> i = left;</span><br><span class="line">	<span class="keyword">int</span> j = right;</span><br><span class="line">	<span class="keyword">while</span> (i != j)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">while</span> (j &gt; i)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span> (a[j] &lt;= temp)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			j--;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">while</span> (i &lt; j)</span><br><span class="line">		{</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (a[i] &gt; temp)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			i++;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">int</span> t = a[i];</span><br><span class="line">			a[i] = a[j];</span><br><span class="line">			a[j] = t;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	a[left] = a[i];</span><br><span class="line">	a[i] = temp;</span><br><span class="line">	<span class="built_in">mySort</span>(left, i<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">mySort</span>(i + <span class="number">1</span>, right);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	<span class="built_in">mySort</span>(<span class="number">1</span>,<span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
         <category>S_算法与数据结构</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
         <tag>算法</tag>
-        <tag>搜索🔍</tag>
+        <tag>排序</tag>
+        <tag>快速</tag>
       </tags>
   </entry>
   <entry>
@@ -2980,6 +2977,28 @@ return 回到上一层函数的内部的 dfs 函数结尾<br>
         <tag>图论</tag>
         <tag>算法</tag>
         <tag>LCA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01 迷宫</title>
+    <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/L_%E9%9B%B6%E4%B8%80%E8%BF%B7%E5%AE%AB/</url>
+    <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
+<p><strong><a href="https://www.luogu.com.cn/problem/P1141">01 迷宫</a></strong></p>
+<h2 id="完整代码"><code>完整代码</code></h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1005</span></span><br><span class="line"><span class="keyword">int</span> m, n, ans;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[MAX][MAX];</span><br><span class="line"><span class="keyword">int</span> book[MAX][MAX];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	book[x][y] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> next[<span class="number">4</span>][<span class="number">2</span>] = { {<span class="number">1</span>,<span class="number">0</span>},{<span class="number">0</span>,<span class="number">1</span>},{<span class="number">-1</span>,<span class="number">0</span>},{<span class="number">0</span>,<span class="number">-1</span>} };</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= <span class="number">3</span>; k++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> dx = x + next[k][<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">int</span> dy = y + next[k][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (((<span class="built_in">map</span>[dx][dy] == <span class="number">0</span> &amp;&amp; <span class="built_in">map</span>[x][y] == <span class="number">1</span>) || (<span class="built_in">map</span>[dx][dy] == <span class="number">1</span> &amp;&amp; <span class="built_in">map</span>[x][y] == <span class="number">0</span>)) &amp;&amp; dx &gt;= <span class="number">1</span> &amp;&amp; dx &lt;= n &amp;&amp; dy &gt;= <span class="number">1</span> &amp;&amp; dy &lt;= n &amp;&amp; book[dx][dy] == <span class="number">0</span>)</span><br><span class="line">		{</span><br><span class="line">			ans++;</span><br><span class="line">			dfs(dx, dy);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			book[i][j] = <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">char</span> ch[MAX];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%1d"</span>, &amp;<span class="built_in">map</span>[i][j]);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">		clear();</span><br><span class="line">		dfs(x, y);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>以上代码虽然是正确的，但是因为<code>效率过低</code>，在洛谷平台的样例测试中会出现<code>时间超限</code>的情况如下图：</strong><br>
+<img src="https://pic.imgdb.cn/item/60feb0415132923bf8635a91.jpg" alt="测试结果"></p>
+<h2 id="剪枝优化">剪枝优化</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//未更</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="END">END</h2>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>算法</tag>
+        <tag>搜索🔍</tag>
       </tags>
   </entry>
   <entry>
@@ -3224,21 +3243,6 @@ other：马的遍历是将距离放在一个二维数组里面，二维数组的
       </tags>
   </entry>
   <entry>
-    <title>素数线性筛法</title>
-    <url>/2022/04/19/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E7%B4%A0%E6%95%B0%E7%BA%BF%E6%80%A7%E7%AD%9B%E6%B3%95/</url>
-    <content><![CDATA[<h1><code>完整代码</code></h1>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line">LL primes[N], cnt;</span><br><span class="line"><span class="keyword">bool</span> st[N];             <span class="comment">// 0 为素数、1为合数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPrimes</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(!st[i]) primes[cnt ++ ] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] * i &lt; n; j ++ ) <span class="comment">// 把以i为最大因数的合数筛掉</span></span><br><span class="line">        {</span><br><span class="line">            st[primes[j] * i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % primes[j] == <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">// if 要一定在下面</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">getPrimes</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i ++ ) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, primes[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1><code>反思总结</code></h1>
-<p><strong>01. if一定在下面</strong></p>
-]]></content>
-      <categories>
-        <category>S_算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>Math</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>图的遍历</title>
     <url>/2021/09/16/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/T_%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/</url>
     <content><![CDATA[<h2 id="题目来源"><code>题目来源</code></h2>
@@ -3268,6 +3272,21 @@ other：马的遍历是将距离放在一个二维数组里面，二维数组的
         <tag>图论</tag>
         <tag>算法</tag>
         <tag>搜索🔍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>素数线性筛法</title>
+    <url>/2022/04/19/S_%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/S_%E7%AE%97%E6%B3%95/S_%E7%B4%A0%E6%95%B0%E7%BA%BF%E6%80%A7%E7%AD%9B%E6%B3%95/</url>
+    <content><![CDATA[<h1><code>完整代码</code></h1>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line">LL primes[N], cnt;</span><br><span class="line"><span class="keyword">bool</span> st[N];             <span class="comment">// 0 为素数、1为合数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPrimes</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++ )</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(!st[i]) primes[cnt ++ ] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] * i &lt; n; j ++ ) <span class="comment">// 把以i为最大因数的合数筛掉</span></span><br><span class="line">        {</span><br><span class="line">            st[primes[j] * i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % primes[j] == <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">// if 要一定在下面</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">getPrimes</span>(<span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i ++ ) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, primes[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1><code>反思总结</code></h1>
+<p><strong>01. if一定在下面</strong></p>
+]]></content>
+      <categories>
+        <category>S_算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
